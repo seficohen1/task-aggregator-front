@@ -1,0 +1,25 @@
+.container__navbar {
+  background-color: var(--second-color);
+  font-family: var(--project-font);
+}
+
+/* NextUI native class modified */
+.nextui-c-hhqfap-gqZKcP-disableBlur-false .nextui-c-egxOLa {
+  background-color: var(--second-color);
+}
+
+.logo__navbar {
+}
+
+.btn__navbar {
+  background-color: var(--third-color);
+  font-weight: 400;
+  letter-spacing: .15rem;
+  color: var(--fifth-color);
+}
+
+.btn__navbar:hover {
+  background-color: var(--fifth-color);
+  color: var(--contrast-color);
+  cursor: default;
+}
