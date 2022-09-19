@@ -16,7 +16,7 @@ const Login = () => {
           <input type="password" name="password" id="password" />
         </article>
         {/* //todo si es admin va al admin si no al userdashboard */}
-        <Link to='/dashboard'><button type="submit">conditional rendering</button></Link>
+        <Link to='/dashboard'><button type="submit">LOGIN</button></Link>
 
       </main>
 
