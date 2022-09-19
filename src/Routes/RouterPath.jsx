@@ -1,8 +1,8 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import DashboardAdmin from '../assets/Pages/DashboardAdmin/DashboardAdmin'
-import DashboardUser from '../assets/Pages/DashboardUser/DashboardUser'
-import Login from '../assets/Pages/Login/Login'
+import DashboardAdmin from "../Pages/DashboardAdmin/DashboardAdmin"
+import DashboardUser from '../Pages/DashboardUser/DashboardUser'
+import Login from "../Pages/Login/Login"
 
 
 const RouterPath = () => {
@@ -11,7 +11,9 @@ const RouterPath = () => {
 
       <Route path='/' element={<Login/>} />
       <Route path='/dashboarduser' element={<DashboardUser/>} />
+      {/* <Route path="/dashboarduser/:userId" element={} /> */}
       <Route path='/dashboardadmin' element={<DashboardAdmin/>} />
+      {/* <Route path="/dashboardadmin/:userId" element={} /> */}
 
     </Routes>
   )
