@@ -1,5 +1,16 @@
 @import url(./assets/css/reset.css);
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 div#root {
   width: 100%;
+}
+
+:root {
+  --project-font:'Inter', sans-serif;
+  --first-color:#AAC4FF;
+  --second-color:#B1B2FF;
+  --third-color:#D2DAFF;
+  --fourth-color:#EEF1FF;
+  --fifth-color:#25316D;
+  --contrast-color:#FEF5AC;
 }
