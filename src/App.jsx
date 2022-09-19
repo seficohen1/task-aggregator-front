@@ -1,14 +1,17 @@
 import './App.css'
 import { BrowserRouter } from 'react-router-dom'
 import RouterPath from './Routes/RouterPath'
+import TaskContextProvider from './context/TaskContext'
 
 function App() {
 
   return (
     <div className="App">
-     <BrowserRouter>
-      <RouterPath/>
-     </BrowserRouter>
+      <TaskContextProvider>
+        <BrowserRouter>
+          <RouterPath/>
+        </BrowserRouter>
+      </TaskContextProvider>
     </div>
   )
 }
