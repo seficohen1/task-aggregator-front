@@ -1,27 +1,27 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { Card, Button, Input, Text } from '@nextui-org/react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './Login.css';
 
 const Login = () => {
-  return (
-    <>
+	return (
+		<main className='container__form'>
+			<Card css={{ w:'30rem', bg: '#B1B2FF', color: '#FEF5AC' }}>
+				<Card.Body>
+					<form className='login__form'>
+						<h3 className='title__form'>LOGIN</h3>
+						<Input className='input__form--name' label='Username' type='text' name='username' id='username' />
+						<Input className='input__form--pass' label='Password' type='text' name='password' id='password' />
+						<Link className='link__form' to='/dashboard'>
+							<Button className='btn__form'>
+								SIGN UP
+							</Button>
+						</Link>
+					</form>
+				</Card.Body>
+			</Card>
+		</main>
+	);
+};
 
-      <main>
-        <p>LOGIN</p>
-        <article>
-          <label htmlFor="username">Username</label>
-          <input type="text" name="username" id="username" />
-        </article>
-        <article>
-          <label htmlFor="password">Pasword</label>
-          <input type="password" name="password" id="password" />
-        </article>
-        {/* //todo si es admin va al admin si no al userdashboard */}
-        <Link to='/dashboard'><button type="submit">LOGIN</button></Link>
-
-      </main>
-
-    </>
-  )
-}
-
-export default Login
+export default Login;

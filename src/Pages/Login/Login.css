@@ -1,0 +1,52 @@
+.container__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: var(--project-font);
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 30rem;
+}
+
+.title__form {
+  margin: 2rem 0;
+  font-size: 2.3rem;
+  font-weight: 200;
+  letter-spacing: .6rem;
+}
+
+.input__form--name,
+.input__form--pass{
+  width: 18rem;
+}
+
+.input__form--name{
+  margin-bottom: 1.5rem;
+}
+
+.link__form {
+  text-decoration: none;
+}
+
+.btn__form{
+  height: 2.8rem;
+  margin: 4rem 0 0;
+  color: #25316D;
+  font-family: var(--project-font);
+  font-size: 1.1rem;
+  font-weight: 300;
+  text-decoration: none;
+  letter-spacing: .4rem;
+  background-color: var(--fifth-color);
+}
+
+.nextui-c-eFfoBo {
+  padding: 0;
+}
