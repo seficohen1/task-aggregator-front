@@ -6,7 +6,7 @@ import './Login.css';
 const Login = () => {
 	return (
 		<main className='container__form'>
-			<Card css={{ w:'30rem', bg: '#B1B2FF', color: '#FEF5AC' }}>
+			<Card css={{ w:'30rem', bg: '#B1B2FF' }}>
 				<Card.Body>
 					<form className='login__form'>
 						<h3 className='title__form'>LOGIN</h3>
