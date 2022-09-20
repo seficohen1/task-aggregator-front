@@ -12,7 +12,7 @@ const Login = () => {
 						<h3 className='title__form'>LOGIN</h3>
 						<Input className='input__form--name' label='Username' type='text' name='username' id='username' />
 						<Input className='input__form--pass' label='Password' type='text' name='password' id='password' />
-						<Link className='link__form' to='/dashboard'>
+						<Link className='link__form' to='dashboarduser'>
 							<Button className='btn__form'>
 								SIGN UP
 							</Button>
