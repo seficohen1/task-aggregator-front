@@ -1,0 +1,9 @@
+.container__taskbar {
+  display: flex;
+  /* align-items: center; */
+  /* justify-content: center; */
+  height: 3rem;
+  padding-top: .2rem;
+  background-color: var(--third-color);
+  font-family: var(--project-font);
+}

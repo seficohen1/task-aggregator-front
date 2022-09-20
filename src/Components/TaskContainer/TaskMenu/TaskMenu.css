@@ -1,0 +1,24 @@
+.taskmenu__container {
+  display: flex;
+  justify-content: flex-start;
+  align-content: flex-end;
+  height: 3rem;
+  margin-bottom: 1rem;
+  border-radius: .4rem;
+  background-color: #AAC4FF;
+  font-family: var(--project-font);
+}
+
+.taskmenu__btn {
+border-radius: .4rem .4rem 0 0;
+background-color: var(--third-color);
+color: var(--fifth-color);
+font-size: 1rem;
+font-weight: 400;
+cursor: default;
+}
+
+.taskmenu__btn:nth-child(1){
+  margin-right: 1rem;
+  background-color: #fff;
+}
