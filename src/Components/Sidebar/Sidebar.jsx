@@ -1,6 +1,6 @@
 import { Container } from "@nextui-org/react";
-import React from "react";
-import { useState, useReducer } from "react";
+import React, { useContext } from "react";
+import { useState, useReducer, useEffect } from "react";
 import uniqid from "uniqid";
 
 import { taskReducer } from "../../reducer/taskReducer";
@@ -9,8 +9,25 @@ import "./Sidebar.css";
 // Delete taskDb when backend works
 import { taskDb } from "../../db/taskDb";
 
+// import { useContext } from "react";
+// import { TaskContext } from "../../context/TaskContext";
+
+// Delete poke API and useFetch when backend works
+// https://pokeapi.co/api/v2/pokemon/ditto
+
+
+import { useFetch } from "../../customHooks/useFetch"; 
+
+// console.log(useFetch)
 const Sidebar = () => {
+  const tasks = useContext(TaskContext)
+  const taskDb = useFetch("http://localhost:4001/dashboard/tasks")
+
+  console.log("tasks", taskDb)
+
   const defaultState = taskDb;
+
+  console.log(defaultState.results)
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -18,6 +35,7 @@ const Sidebar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(taskDb)
     if (title && description) {
       const newTask = { id: uniqid(), title, description };
       dispatch({ type: "ADD_TASK", payload: newTask });

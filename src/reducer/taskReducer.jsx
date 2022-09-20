@@ -1,14 +1,18 @@
 import React from 'react'
+import { useContext } from 'react'
+import { TaskContext } from '../context/TaskContext'
+
 
 // Delete taskDb when backend works
 // import { taskDb } from "../../db/taskDb";
 
+// const tasks = useContext(TaskContext)
 export const taskReducer = (state, action) => {
     if (action.type === "ADD_TASK") {
+        console.log(state)
         const newTask = [...state, action.payload]
         console.log(newTask)
-        return newTask
-        // save local storage??
+        return newTask        
     }
 
 
