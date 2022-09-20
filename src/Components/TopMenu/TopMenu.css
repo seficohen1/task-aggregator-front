@@ -8,9 +8,6 @@
   background-color: var(--second-color);
 }
 
-.logo__navbar {
-}
-
 .btn__navbar {
   background-color: var(--third-color);
   font-weight: 400;

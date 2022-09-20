@@ -1,10 +1,11 @@
 import React from 'react';
 import { Navbar, Button } from '@nextui-org/react';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import './TopMenu.css'
 
 const TopMenu = () => {
 	return (
+		<>
 		<Navbar className='container__navbar'>
 			<Navbar.Brand>
 				<div className='logo__navbar'>LOGO</div>
@@ -15,6 +16,10 @@ const TopMenu = () => {
 				</Navbar.Item>
 			</Navbar.Content>
 		</Navbar>
+		<section>
+			<Outlet />
+		</section>
+		</>
 	);
 };
 
