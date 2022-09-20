@@ -1,0 +1,48 @@
+.container__sidebar {
+  height: 45rem;
+  border-radius: .4rem;
+  background-color: var(--second-color);
+  font-family: var(--project-font);
+}
+
+.sidebar__btn--section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10rem;
+}
+
+.sidebar__btn--article {
+  display: flex;
+  justify-content: space-between;
+  width: 14rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #fff;
+  padding-bottom: .4rem;
+}
+
+.sidebar__task--btn, 
+.sidebar__employee--btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 200;
+}
+
+.sidebar__task--btn:hover, 
+.sidebar__employee--btn:hover{
+  font-weight: 600;
+  color: var(--fifth-color);
+} 
+
+.sidebar__icon--btn {
+  background: none;
+  border: none;
+}
+
+.add__icon--btn {
+  font-size: 1.5rem;
+  color:var(--fifth-color);
+}
