@@ -1,0 +1,6 @@
+.container__dashbaord {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  background-color: red;
+}
