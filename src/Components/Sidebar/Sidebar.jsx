@@ -4,10 +4,11 @@ import { useState, useReducer, useEffect } from "react";
 import uniqid from "uniqid";
 
 import { taskReducer } from "../../reducer/taskReducer";
+
 import "./Sidebar.css";
 
 // Delete taskDb when backend works
-import { taskDb } from "../../db/taskDb";
+// import { taskDb } from "../../db/taskDb";
 
 // import { useContext } from "react";
 // import { TaskContext } from "../../context/TaskContext";
@@ -18,16 +19,23 @@ import { taskDb } from "../../db/taskDb";
 
 import { useFetch } from "../../customHooks/useFetch"; 
 
+const defaultState = taskDb
 // console.log(useFetch)
 const Sidebar = () => {
-  const tasks = useContext(TaskContext)
-  const taskDb = useFetch("http://localhost:4001/dashboard/tasks")
+  
+  // const taskDb = useFetch("http://localhost:4001/dashboard/tasks")
+
+  
 
   console.log("tasks", taskDb)
+  console.log(taskDb)
 
-  const defaultState = taskDb;
+  // const defaultState = taskDb
 
-  console.log(defaultState.results)
+  console.log(typeof defaultState)
+  // console.log(Object.values(Object.entries(defaultState)))
+
+  console.log(typeof Object.entries(defaultState))
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
