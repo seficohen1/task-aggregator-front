@@ -2,10 +2,9 @@ import { Container } from '@nextui-org/react'
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import './Sidebar.css'
-import { Container } from "@nextui-org/react";
-
 import { useState, useReducer, useEffect } from "react";
 import uniqid from "uniqid";
+
 
 import { taskReducer } from "../../reducer/taskReducer";
 import "./Sidebar.css";
