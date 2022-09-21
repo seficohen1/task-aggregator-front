@@ -1,44 +1,42 @@
 import { Container } from "@nextui-org/react";
-import React, { useContext } from "react";
+
 import { useState, useReducer, useEffect } from "react";
 import uniqid from "uniqid";
 
 import { taskReducer } from "../../reducer/taskReducer";
 import "./Sidebar.css";
 
-// Delete taskDb when backend works
-import { taskDb } from "../../db/taskDb";
-
-// import { useContext } from "react";
-// import { TaskContext } from "../../context/TaskContext";
-
-// Delete poke API and useFetch when backend works
-// https://pokeapi.co/api/v2/pokemon/ditto
-
-
 import { useFetch } from "../../customHooks/useFetch"; 
 
 // console.log(useFetch)
 const Sidebar = () => {
-  const tasks = useContext(TaskContext)
+  // const tasks = useContext(TaskContext)
+  const [taskState, taskDispatch] = useReducer(taskReducer, []);
   const taskDb = useFetch("http://localhost:4001/dashboard/tasks")
-
+  
+  
+  useEffect(() => {
+    taskDb.map((taskItem) => {
+      return taskDispatch({ type: 'ADD_TASK', payload: taskItem})
+    })
+    
+  }, [taskDb])
   console.log("tasks", taskDb)
 
-  const defaultState = taskDb;
+  
 
-  console.log(defaultState.results)
+  console.log(taskDb)
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const [state, dispatch] = useReducer(taskReducer, defaultState);
+  console.log(taskState)
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(taskDb)
     if (title && description) {
       const newTask = { id: uniqid(), title, description };
-      dispatch({ type: "ADD_TASK", payload: newTask });
+      taskDispatch({ type: "ADD_TASK", payload: newTask });
       setTitle("");
       setDescription("");
     }
