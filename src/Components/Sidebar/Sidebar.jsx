@@ -11,21 +11,16 @@ import { useFetch } from "../../customHooks/useFetch";
 // console.log(useFetch)
 const Sidebar = () => {
   // const tasks = useContext(TaskContext)
-  const [taskState, taskDispatch] = useReducer(taskReducer, []);
+  const defaultState = []
+  const [taskState, taskDispatch] = useReducer(taskReducer, defaultState);
   const taskDb = useFetch("http://localhost:4001/dashboard/tasks")
-  
   
   useEffect(() => {
     taskDb.map((taskItem) => {
-      return taskDispatch({ type: 'ADD_TASK', payload: taskItem})
-    })
-    
+      taskDispatch({ type: 'ADD_TASK', payload: taskItem})
+    })    
   }, [taskDb])
-  console.log("tasks", taskDb)
-
   
-
-  console.log(taskDb)
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -33,7 +28,7 @@ const Sidebar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(taskDb)
+    
     if (title && description) {
       const newTask = { id: uniqid(), title, description };
       taskDispatch({ type: "ADD_TASK", payload: newTask });

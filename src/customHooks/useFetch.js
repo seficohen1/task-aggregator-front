@@ -20,7 +20,6 @@ export const useFetch = (url) => {
       const response = await fetch(url);
       const data = await response.json();
       setTasks(data.results)
-      console.log(data);      
     } catch (error) {
       console.log(error);
     }
