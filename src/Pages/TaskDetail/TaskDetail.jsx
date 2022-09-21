@@ -17,8 +17,8 @@ export default function TaskDetail() {
     <div>
       <section>
         <h1>Task: {title}</h1>
-        <p>{assigned}</p>
-        <p>Assigned on: <span>{date}</span></p>
+        <p>Assigned to: {assigned}</p>
+        <p>Assigned on: {date}</p>
         <p>Task id: {id}</p>
         <p>Task Status: {status}</p>
       </section> 
