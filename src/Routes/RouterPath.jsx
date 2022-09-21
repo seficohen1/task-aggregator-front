@@ -1,22 +1,28 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import TopMenu from '../Components/TopMenu/TopMenu';
-import DashboardAdmin from '../Pages/DashboardAdmin/DashboardAdmin';
-import DashboardUser from '../Pages/DashboardUser/DashboardUser';
+import Admin from '../Pages/Admin/Admin';
+import Dashboard from '../Pages/Dashboard/Dashboard'
+import TaskDetail from '../Pages/TaskDetail/TaskDetail'
+import UserDetail from '../Pages/UserDetail/UserDetail'
 import Login from '../Pages/Login/Login';
+import Sidebar from '../Components/Sidebar/Sidebar';
 
 const RouterPath = () => {
 	return (
 		<Routes>
 			<Route index element={<Login />} />
-			<Route path='/' element={<TopMenu />}>
-				<Route path='dashboarduser' element={<DashboardUser />} />
-				{/* <Route path="dashboarduser/:userId" element={} /> */}
-				<Route path='dashboardadmin' element={<DashboardAdmin />} />
-				{/* <Route path="dashboardadmin/:userId" element={} /> */}
+
+			<Route path='/' element={<TopMenu />} >
+				<Route path='dashboard' element={<Dashboard />} />
+				<Route path='admin' element={<Admin />} />
+				<Route path='dashboard/:taskId' element={<TaskDetail />} />
+				<Route path='dashboard/:userId' element={<UserDetail />} />
 			</Route>
 		</Routes>
 	);
 };
+
+
 
 export default RouterPath;
