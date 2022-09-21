@@ -1,61 +1,50 @@
 import { Container } from "@nextui-org/react";
-import React, { useContext } from "react";
+// import React, { useContext } from "react";
 import { useState, useReducer, useEffect } from "react";
 import uniqid from "uniqid";
-
-import { taskReducer } from "../../reducer/taskReducer";
-
+// import { taskReducer } from "../../reducer/taskReducer";
 import "./Sidebar.css";
 
 // Delete taskDb when backend works
-// import { taskDb } from "../../db/taskDb";
-
-// import { useContext } from "react";
-// import { TaskContext } from "../../context/TaskContext";
-
-// Delete poke API and useFetch when backend works
-// https://pokeapi.co/api/v2/pokemon/ditto
+import { taskDb } from "../../db/taskDb";
+import { useFetch } from "../../customHooks/useFetch";
 
 
-import { useFetch } from "../../customHooks/useFetch"; 
-
-const defaultState = taskDb
-// console.log(useFetch)
-const Sidebar = () => {
-  
-  // const taskDb = useFetch("http://localhost:4001/dashboard/tasks")
-
-  
-
-  console.log("tasks", taskDb)
-  console.log(taskDb)
-
-  // const defaultState = taskDb
-
-  console.log(typeof defaultState)
-  // console.log(Object.values(Object.entries(defaultState)))
-
-  console.log(typeof Object.entries(defaultState))
+const Sidebar = () => { 
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState("");  
+  const [user, setUser] = useState("")
+  const [date, setDate] = useState("")
 
-  const [state, dispatch] = useReducer(taskReducer, defaultState);
+  const [tasks, setTasks] = useState([]);
+
+  const url = "http://localhost:4001/dashboard/tasks";
+  const getTasks = async () => {
+    const response = await fetch(url);
+    const data = await response.json();
+    setTasks(data.results);
+  };
+  useEffect(() => {
+    getTasks();
+  }, []);  
+
+  console.log(tasks);  
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(taskDb)
-    if (title && description) {
-      const newTask = { id: uniqid(), title, description };
-      dispatch({ type: "ADD_TASK", payload: newTask });
+    if (title && description) {      
+      const taskInfo = { id: uniqid(), title, description, user, date };      
+      setTasks([...tasks, taskInfo])
       setTitle("");
       setDescription("");
     }
   };
+ 
 
   return (
     <Container className="container__sidebar">
       <section className="sidebar__btn--section">
-        <article className="sidebar__btn--article">          
+        <article className="sidebar__btn--article">
           <form className="" onSubmit={handleSubmit}>
             <div className="">
               <label className="title" htmlFor="title">
@@ -65,24 +54,57 @@ const Sidebar = () => {
                 type="text"
                 id="title"
                 name="title"
-                placeholder="insert title"
+                placeholder="Insert title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
             </div>
+
             <div className="">
               <label className="description" htmlFor="description">
-                Task title:
+                Task description:
               </label>
               <input
                 type="text"
                 id="description"
                 name="description"
-                placeholder="insert description"
+                placeholder="Insert description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
             </div>
+
+            <div className="">
+              <label className="description" htmlFor="description">
+                User:
+              </label>
+              <input
+                type="text"
+                id="description"
+                name="description"
+                placeholder="Insert description"
+                value={user}
+                onChange={(e) => setUser(e.target.value)}
+              />
+            </div>
+
+
+            <div className="">
+              <div>
+                <label className="description" htmlFor="description">
+                Date:
+                </label>
+              </div>
+              <input
+                type="date"
+                id="description"
+                name="description"
+                placeholder="Insert date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+              />
+            </div>
+
             <button type="submit">Add Task</button>
           </form>
 
