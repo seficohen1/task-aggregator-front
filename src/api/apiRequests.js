@@ -20,8 +20,13 @@ export const userLogin = async () => {
 };
 
 export const getTasks = async (token) => {
-  await axios
-    .get(tasksURL)
+  await axios({
+    method: "get",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    url: tasksURL,
+  })
     .then((res) => {
       let data = Object.entries(res);
       const iterableData = data[0][1].results;
@@ -35,8 +40,13 @@ export const getTasks = async (token) => {
 };
 
 export const getTask = async (id, token) => {
-  await axios
-    .get(tasksURL + id)
+  await axios({
+    method: "get",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    url: tasksURL + id,
+  })
     .then((res) => {
       console.log(res.data.results);
     })
