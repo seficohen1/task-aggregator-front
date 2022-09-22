@@ -5,36 +5,23 @@ import './TaskContainer.css'
 import TaskBar from './TaskBar/TaskBar';
 import TaskMenu from './TaskMenu/TaskMenu';
 import uniqid from 'uniqid'
+import { fetchTasks } from '../../api/api';
 
 
 const TaskContainer = () => {
-
 	const [docs, setDocs] = useState([]);
 
-	async function fetchTasks () {
-		try {
-			const res = await fetch('http://localhost:4001/dashboard/tasks')
-			const data = await res.json();
-			const results = data.results;
-			setDocs(results)
-		} catch (error) {
-			console.error(error)
-		}
-	}
-
 	useEffect(() => {
-		fetchTasks()
+		fetchTasks(setDocs)
 	}, [])
 
-
-	console.log(typeof docs)
+	
 	return (
     <>
     <TaskMenu />
     <TaskBar />
 		<section className='container__taskcontainer'>
-			{docs.map(doc => (
-				<>
+			{docs.map(doc => (				
 					<Task
 						key={uniqid()}
 						id={doc.id}
@@ -43,7 +30,6 @@ const TaskContainer = () => {
 						status={doc.status}
 						date={doc.date}
 					/>
-				</>
 			))}
 		</section>
     </>
