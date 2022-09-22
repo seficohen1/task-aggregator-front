@@ -26,8 +26,8 @@ const Task = (props) => {
             <select className='task__select'>
               <option className='task__select--option' value="0">Status</option>
               <option className='task__select--option' value="1">Complete</option>
-              <option className='task__select--option' value="2">Waiting</option>
-              <option className='task__select--option' value="3">In process</option>
+              <option className='task__select--option' value="2">Pending</option>
+              <option className='task__select--option' value="3">In progress</option>
               <option className='task__select--option' value="4">Cancelled</option>
             </select>
           </Grid>

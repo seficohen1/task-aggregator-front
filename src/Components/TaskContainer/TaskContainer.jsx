@@ -13,16 +13,19 @@ const TaskContainer = () => {
 
 	useEffect(() => {
 		fetchTasks(setDocs)
-		docs.map(item => console.log(item.id))
 	}, [])
 
 	
+
+
+
 	return (
     <>
     <TaskMenu />
     <TaskBar />
 		<section className='container__taskcontainer'>
-			{docs.map(doc => (				
+			{docs.map(doc => (
+				
 					<Task
 						key={uniqid()}
 						id={doc.id}
@@ -31,6 +34,7 @@ const TaskContainer = () => {
 						status={doc.status}
 						date={doc.date}
 					/>
+				
 			))}
 		</section>
     </>

@@ -55,16 +55,25 @@ export default function TaskDetail() {
             <article>
               <Input
                   className='task__input'
-                  label='Status'
-                  type='text'
-                  value={assigned.status}
+                  label='Start Date'
+                  type='date'
+                  value={assigned.startDate}
                 />
               <Input
                 className='task__input'
-                label='Date'
-                type='text'
-                value={assigned.createdAt}
+                label='Due Date'
+                type='date'
+                value={assigned.dueDate}
               />
+
+            </article>
+            <article>
+            <Input
+                className='task__input'
+                label='Status'
+                type='text'
+                value={assigned.status}
+            />
             </article>
       <Button className='task__btn' type='submit'>Edit Task</Button>
         </form>
