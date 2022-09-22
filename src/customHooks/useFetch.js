@@ -48,15 +48,31 @@ export const useFetch = (url) => {
 //   },[])
 // };
 
+export const useCreateTask = (url) => {
+  const createTask = async () => {
+    try {
+      const response = await fetch(url , {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({a: 7, str: 'Some string: &=&'})
+      })
+      const data = await response.json();
+      const tasksDb = data.results
+    //   setTasksDb(data)
+      console.log(tasksDb);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    createTask()
+  },[])
+};
 
 
-// export const usePostData = (url) => {
-//     const createTask = async () => {
-//       console.log('jsljfjlsdjlfjslf')
-//     };
-  
-//     useEffect(() => {
-//         usePostData()
-//     },[])
-//   };
+
 
