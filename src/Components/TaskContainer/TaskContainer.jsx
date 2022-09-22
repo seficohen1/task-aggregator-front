@@ -26,7 +26,7 @@ const TaskContainer = () => {
 						key={uniqid()}
 						id={doc.id}
 						title={doc.title}
-						assigned={doc.assigned}
+						assigned={`${doc.user.firstName} ${doc.user.lastName}`}
 						status={doc.status}
 						date={doc.date}
 					/>
