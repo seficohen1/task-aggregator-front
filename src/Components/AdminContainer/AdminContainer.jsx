@@ -1,11 +1,14 @@
 import React from 'react'
 import RegisterUser from './RegisterUser/RegisterUser'
+import './AdminContainer.css'
 
 
 const AdminContainer = () => {
   return (
     <>
-      <RegisterUser />
+      <main className="admincontainer__main">
+        <RegisterUser />
+      </main>
     </>
   )
 }

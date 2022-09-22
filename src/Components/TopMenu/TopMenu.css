@@ -1,15 +1,21 @@
 .container__navbar {
-  background-color: var(--second-color);
+  /* background-color: transparent; */
   font-family: var(--project-font);
+  height: 6.3rem;
 }
 
 /* NextUI native class modified */
 .nextui-c-hhqfap-gqZKcP-disableBlur-false .nextui-c-egxOLa {
-  background-color: var(--second-color);
+  background: transparent;
+  backdrop-filter: none;
+}
+
+.nextui-c-hhqfap-kAwfsS-disableShadow-false{
+  box-shadow: none;
 }
 
 .btn__navbar {
-  background-color: var(--third-color);
+  background-color: var(--contrast-color);
   font-weight: 400;
   letter-spacing: .15rem;
   color: var(--fifth-color);

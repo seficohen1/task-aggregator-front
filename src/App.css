@@ -3,6 +3,7 @@
 
 div#root {
   width: 100%;
+  background: linear-gradient(to right, hsla(18, 96%, 80%, 0.4), hsla(279, 81%, 75%, 0.4), hsla(266, 80%, 69%, 0.4)); 
 }
 
 :root {
