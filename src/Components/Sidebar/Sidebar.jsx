@@ -18,15 +18,15 @@ const Sidebar = () => {
 
   const [tasks, setTasks] = useState([]);
 
-  const url = "http://localhost:4001/dashboard/tasks";
-  const getTasks = async () => {
-    const response = await fetch(url);
-    const data = await response.json();
-    setTasks(data.results);
-  };
-  useEffect(() => {
-    getTasks();
-  }, []);  
+  // const url = "http://localhost:4001/dashboard/tasks";
+  // const getTasks = async () => {
+  //   const response = await fetch(url);
+  //   const data = await response.json();
+  //   setTasks(data.results);
+  // };
+  // useEffect(() => {
+  //   getTasks();
+  // }, []);  
 
   console.log(tasks);  
 
