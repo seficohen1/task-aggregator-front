@@ -16,7 +16,7 @@ const RouterPath = () => {
 			<Route path='/' element={<TopMenu />} >
 				<Route path='dashboard' element={<Dashboard />} />
 				<Route path='admin' element={<Admin />} />
-				<Route path='dashboard/:taskId' element={<TaskDetail />} />
+				<Route path='dashboard/task' element={<TaskDetail />} /> 
 				<Route path='dashboard/:userId' element={<UserDetail />} />
 			</Route>
 		</Routes>
