@@ -9,9 +9,7 @@ const Task = (props) => {
   const [color, setColor] = useState()    
   const navigate = useNavigate();
  
-  const handleEditClick = (taskObject) => {
-    navigate('task', {state: props})
-  }
+
 
 
 
@@ -44,9 +42,12 @@ const Task = (props) => {
                 variant='light'
                 aria-label='Actions'
               >
-                
-                <Dropdown.Item key='edit' textValue='edit task'><Button type="button" onPress={handleEditClick}>Edit</Button></Dropdown.Item>
-                
+
+
+
+                <Dropdown.Item key='edit' textValue='edit task'>
+                  <Link to='/dashboard/task' state={ props }>Edit</Link>
+                </Dropdown.Item>
                 <Dropdown.Item key='delete' color='error'>Delete</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
