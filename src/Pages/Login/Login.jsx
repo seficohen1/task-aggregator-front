@@ -6,13 +6,13 @@ import './Login.css';
 const Login = () => {
 	return (
 		<main className='container__form'>
-			<Card css={{ w:'30rem', bg: '#B1B2FF' }}>
+			<Card className='login__card' css={{ w:'30rem' }}>
 				<Card.Body>
 					<form className='login__form'>
 						<h3 className='title__form'>LOGIN</h3>
 						<Input className='input__form--name' label='Username' type='text' name='username' id='username' />
 						<Input className='input__form--pass' label='Password' type='text' name='password' id='password' />
-						<Link className='link__form' to='dashboarduser'>
+						<Link className='link__form' to='dashboard'>
 							<Button className='btn__form'>
 								SIGN UP
 							</Button>

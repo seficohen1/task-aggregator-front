@@ -5,6 +5,12 @@
   justify-content: center;
   height: 100vh;
   font-family: var(--project-font);
+  background: #B993D6;  /* fallback for old browsers */
+background: linear-gradient(to right, #8CA6DB, #B993D6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.login__card {
+  background-color: rgba(255, 255, 255, 0.418);
 }
 
 .login__form {
