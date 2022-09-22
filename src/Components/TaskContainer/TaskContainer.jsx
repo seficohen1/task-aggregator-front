@@ -13,6 +13,7 @@ const TaskContainer = () => {
 
 	useEffect(() => {
 		fetchTasks(setDocs)
+		docs.map(item => console.log(item.id))
 	}, [])
 
 	

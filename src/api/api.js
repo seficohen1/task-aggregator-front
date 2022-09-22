@@ -15,4 +15,6 @@ async function fetchTasks (setState) {
 }
 
 
-export { fetchTasks }
+export { 
+  fetchTasks 
+}
