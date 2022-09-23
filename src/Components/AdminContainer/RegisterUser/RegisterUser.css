@@ -1,8 +1,5 @@
 .register__container {
   display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
   height: 45rem;
   font-family: var(--project-font);
 }
@@ -27,6 +24,7 @@
 }
 
 .register__btn {
+  margin-top: 1.5rem;
   color: var(--fifth-color);
   font-family: var(--project-font);
   font-size: 1rem;
@@ -37,6 +35,6 @@
 }
 
 .register__input {
-  width: 18rem;
+  width: 20rem;
   margin: 0 0 1rem;
 }

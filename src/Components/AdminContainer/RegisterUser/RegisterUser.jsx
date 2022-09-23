@@ -37,7 +37,7 @@ const RegisterUser = () => {
 							pattern: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/i,
 						})}
 					/>
-					<Input
+					<Input.Password
 						className='register__input'
 						label='Password'
 						type='password'
