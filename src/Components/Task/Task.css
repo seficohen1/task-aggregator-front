@@ -15,7 +15,7 @@
 }
 
 .container__grid:hover {
-  background-color: #e8ecff;
+  background-color: rgba(255, 255, 255, 0.637);
 }
 
 .dropdown__icon {
