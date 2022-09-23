@@ -9,9 +9,7 @@ import { TaskContext } from '../context/TaskContext'
 // const tasks = useContext(TaskContext)
 export const taskReducer = (state, action) => {
     if (action.type === "ADD_TASK") {
-        console.log(state)
         const newTask = [...state, action.payload]
-        console.log(newTask)
         return newTask        
     }
 
