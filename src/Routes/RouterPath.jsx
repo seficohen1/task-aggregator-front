@@ -18,6 +18,7 @@ const RouterPath = () => {
 				<Route path='admin' element={<Admin />} />
 				<Route path='dashboard/:taskId' element={<TaskDetail />} />
 				<Route path='dashboard/:userId' element={<UserDetail />} />
+				<Route path="dashboard/settings" element={<UserDetail />}></Route>
 			</Route>
 		</Routes>
 	);
