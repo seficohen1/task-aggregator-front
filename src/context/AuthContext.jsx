@@ -1,7 +1,7 @@
 import React, {createContext, useState, useEffect} from "react";
 import axios from 'axios'
 
-import users from '../dataTest/mockUser.js'
+
 
 const AuthContext = createContext()
 

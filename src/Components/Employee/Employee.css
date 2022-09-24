@@ -1,0 +1,14 @@
+.container__task{
+  display: flex;
+  font-family: var(--project-font);
+}
+
+.employee__container {
+  display: flex;
+  align-items: center;
+  height: 4rem;
+  margin: 1rem 0 0 0;
+  border-left: 5px solid var(--fifth-color);
+  border-radius: .4rem;
+  background-color: var(--fourth-color);
+}

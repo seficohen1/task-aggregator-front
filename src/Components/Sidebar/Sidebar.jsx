@@ -1,6 +1,6 @@
 import { Container } from '@nextui-org/react'
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import './Sidebar.css'
 
 
@@ -23,6 +23,7 @@ const Sidebar = () => {
       <section>
         <Outlet />
       </section>
+      
     </>
 )
     
