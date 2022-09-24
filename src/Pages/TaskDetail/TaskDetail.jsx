@@ -72,13 +72,14 @@ export default function TaskDetail() {
 
             </article>
             <article>
-            <Input
-                className='task__input'
-                label='Status'
-                type='text'
-                value={status && status}
-                {...register('status')}
-            />
+            {/* set value to selected to match values with state option */}
+            <select className='task__select' style={dropdownBackgroundColor} value={currentStatus.status} onChange={handleChange}>
+              <option className='task__select--option' value="none">Status</option>
+              <option className='task__select--option' value="complete">Complete</option>
+              <option className='task__select--option' value="pending">Pending</option>
+              <option className='task__select--option' value="in progress">In Progress</option>
+              <option className='task__select--option' value="cancelled">Cancelled</option>
+            </select>
             </article>
       <Button className='task__btn' type='submit'>Edit Task</Button>
         </form>

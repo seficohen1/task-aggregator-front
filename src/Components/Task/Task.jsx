@@ -1,40 +1,16 @@
 import { Grid, Dropdown, Collapse, Button } from '@nextui-org/react'
-import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './Task.css'
-import { updateTask } from '../../api/api'
-// import { setStatusDropdownColors } from '../../utils/styles'
-import { styles, dates } from '../../utils/index'
+import TaskStatusSelect from '../TaskStatusSelect/TaskStatusSelect'
+import { dates } from '../../utils/index'
 
 
 const Task = (props) => {
-  const { dbId, title, user } = props;
-  // set status to update dropdown 
-  const [currentStatus, setCurrentStatus] = useState({ status: 'none' })
-
-   // set and maintain bg color on state changes, imported from utils
-   const dropdownBackgroundColor = styles.setStatusDropdownColors(currentStatus.status)
-
+  const { dbId, title, user, status } = props;
+ 
    // format date for dashboard, using func from utils
    const dueDate = dates.getLongDate(props.dueDate)
-   
-  // load status value on render
-  useEffect(() => {
-    setCurrentStatus({ status: props.status })
-  }, [])
 
-  // update db and state with status changes
-  function handleChange (e) {
-    setCurrentStatus({ status: e.target.value })
-    const body = {
-      status: e.target.value
-    }
-    updateTask(dbId, body)
-  }
-
-console.log(dueDate)
-  
-  
   return (
       <main className='container__task'>
         <Grid.Container className='container__grid' gap={2} justify='center'>
@@ -46,13 +22,7 @@ console.log(dueDate)
           </Grid>
           <Grid className='task__grid' xs={2}>
             {/* set value to selected to match values with state option */}
-            <select className='task__select' style={dropdownBackgroundColor} value={currentStatus.status} onChange={handleChange}>
-              <option className='task__select--option' value="none">Status</option>
-              <option className='task__select--option' value="complete">Complete</option>
-              <option className='task__select--option' value="pending">Pending</option>
-              <option className='task__select--option' value="in progress">In Progress</option>
-              <option className='task__select--option' value="cancelled">Cancelled</option>
-            </select>
+            <TaskStatusSelect status={status} dbId={dbId} />
           </Grid>
           <Grid className='task__grid' xs={3}>
             {dueDate}
