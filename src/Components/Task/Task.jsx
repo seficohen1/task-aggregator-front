@@ -2,37 +2,53 @@ import { Grid, Dropdown, Collapse, Button } from '@nextui-org/react'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './Task.css'
+import { updateTask } from '../../api/api'
+import { setStatusDropdownColors } from '../../utils/styles'
 
 
 const Task = (props) => {
-  const { id, title, assigned, status, date } = props;
-  const [color, setColor] = useState()    
-  const navigate = useNavigate();
- 
+  const { dbId, title, user, dueDate } = props;
+  // set status to update dropdown value
+  const [currentStatus, setCurrentStatus] = useState({ status: 'none' })
 
+  // load status value on render
+  useEffect(() => {
+    setCurrentStatus({ status: props.status })
+  }, [])
 
+  // update db and state with status changes
+  function handleChange (e) {
+    setCurrentStatus({ status: e.target.value })
+    const body = {
+      status: e.target.value
+    }
+    updateTask(dbId, body)
+  }
 
-
-  return (    
+  // set and maintain bg color on state changes, imported from utils
+  const dropdownBackgroundColor = setStatusDropdownColors(currentStatus.status)
+  
+  return (
       <main className='container__task'>
         <Grid.Container className='container__grid' gap={2} justify='center'>
           <Grid className='task__grid' xs={5}>
             {title}
           </Grid>
           <Grid className='task__grid' xs={2}>
-          <span className="task__username">{assigned}</span>
+          <span className="task__username">{user.firstName} {user.lastName}</span>
           </Grid>
           <Grid className='task__grid' xs={2}>
-            <select className='task__select'>
-              <option className='task__select--option' value="0">Status</option>
-              <option className='task__select--option' value="1">Complete</option>
-              <option className='task__select--option' value="2">Pending</option>
-              <option className='task__select--option' value="3">In progress</option>
-              <option className='task__select--option' value="4">Cancelled</option>
+            {/* set value to selected to match values with state option */}
+            <select className='task__select' style={dropdownBackgroundColor} value={currentStatus.status} onChange={handleChange}>
+              <option className='task__select--option' value="none">Status</option>
+              <option className='task__select--option' value="complete">Complete</option>
+              <option className='task__select--option' value="pending">Pending</option>
+              <option className='task__select--option' value="in progress">In Progress</option>
+              <option className='task__select--option' value="cancelled">Cancelled</option>
             </select>
           </Grid>
           <Grid className='task__grid' xs={3}>
-            {date}
+            {dueDate}
             <Dropdown className='task__dropdown'>
               <Dropdown.Button color='secondary' light>
               <i className='dropdown__icon bx bx-dots-horizontal-rounded'></i>
@@ -42,9 +58,6 @@ const Task = (props) => {
                 variant='light'
                 aria-label='Actions'
               >
-
-
-
                 <Dropdown.Item key='edit' textValue='edit task'>
                   <Link to='/dashboard/task' state={ props }>Edit</Link>
                 </Dropdown.Item>

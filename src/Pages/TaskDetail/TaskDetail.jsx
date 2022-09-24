@@ -1,32 +1,32 @@
 import { useLocation } from "react-router-dom"
-import TopMenu from '../../Components/TopMenu/TopMenu'
 import { Button, Input, Grid, Textarea } from '@nextui-org/react';
 import './TaskDetail.css'
 import { useForm } from 'react-hook-form';
+import { updateTask } from "../../api/api";
+import { useState } from 'react'
 
 
 export default function TaskDetail() {
-  const location = useLocation();
-  const { assigned, description, id, date, status, title } = location.state;
+  const location = useLocation() || null;
+  const { register, handleSubmit } = useForm();
+  const { firstName, lastName, description, _id, status, title, startDate, dueDate } = location.state ;
+  const [data, setData ] = useState([]);
 
-  const handleSubmit = () => {
-    console.log('hello')
-  }
-
-
+  const onSubmit = data => console.log(data);
+  console.log(location.state.firstName)
 
   return (
     <>
       <Grid.Container className='task__container'>
-        <form className='task__form' onSubmit={handleSubmit()}>
+        <form className='task__form' onSubmit={handleSubmit(onSubmit)}>
           <h2 className='task__title'>TASK DETAILS</h2>
           <article>
             <Input 
               className='task__input wide '
               label='Task:'
               type='text'
-              value={title}
-              // {...register('name')}
+              value={title && title}
+              {...register('task-title')}
              />
           </article>          
           <article>
@@ -34,13 +34,15 @@ export default function TaskDetail() {
                 className='task__input'
                 label='First Name'
                 type='text'
-                // value={user.firstName}
+                value={firstName && firstName}
+                {...register('task-firstName')}
             />
             <Input
                 className='task__input'
                 label='Last Name'
                 type='text'
-                // value={user.lastName}
+                value={lastName && lastName}
+                {...register('task-lastName')}
             />
           </article>
           <article>
@@ -48,8 +50,8 @@ export default function TaskDetail() {
                 className='task__input wide'
                 label='Description:'
                 type='text'
-                value={description}
-                // {...register('name')}
+                value={description && description}
+                {...register('task-description')}
               />
             </article>
             <article>
@@ -57,13 +59,15 @@ export default function TaskDetail() {
                   className='task__input'
                   label='Start Date'
                   type='date'
-                  value={assigned.startDate}
+                  value={startDate && startDate}
+                  {...register('start-date')}
                 />
               <Input
                 className='task__input'
                 label='Due Date'
                 type='date'
-                value={assigned.dueDate}
+                value={dueDate && dueDate}
+                {...register('due-date')}
               />
 
             </article>
@@ -72,7 +76,8 @@ export default function TaskDetail() {
                 className='task__input'
                 label='Status'
                 type='text'
-                value={assigned.status}
+                value={status && status}
+                {...register('status')}
             />
             </article>
       <Button className='task__btn' type='submit'>Edit Task</Button>
