@@ -17,7 +17,7 @@ async function fetchTasks (setState) {
 
 
 async function updateTask (dbId, body) {
-  console.log(dbId)
+  console.log(dbId.length)
   console.log(JSON.stringify(body))
   const options = {
     method: 'PATCH',

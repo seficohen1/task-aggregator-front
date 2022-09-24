@@ -5,7 +5,8 @@ import { updateTask } from '../../api/api'
 
 
 const TaskStatusSelect = (props) => {
-  const { dbId, status } = props;
+  console.log(props)
+  const { dbId } = props;
   const [currentStatus, setCurrentStatus] = useState({ status: 'none' })
 
   const dropdownBackgroundColor = styles.setStatusDropdownColors(currentStatus.status)
@@ -15,10 +16,12 @@ const TaskStatusSelect = (props) => {
   }, [])
 
   function handleChange (e) {
+    
     setCurrentStatus({ status: e.target.value })
     const body = {
       status: e.target.value
     }
+    console.log(dbId)
     updateTask(dbId, body)
   }
 

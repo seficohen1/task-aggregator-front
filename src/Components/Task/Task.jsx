@@ -6,10 +6,11 @@ import { dates } from '../../utils/index'
 
 
 const Task = (props) => {
-  const { dbId, title, user, status } = props;
- 
+  const { dbId, user, title, status } = props;
+ console.log(props)
    // format date for dashboard, using func from utils
    const dueDate = dates.getLongDate(props.dueDate)
+   console.log(Date())
 
   return (
       <main className='container__task'>
@@ -22,7 +23,7 @@ const Task = (props) => {
           </Grid>
           <Grid className='task__grid' xs={2}>
             {/* set value to selected to match values with state option */}
-            <TaskStatusSelect status={status} dbId={dbId} />
+            <TaskStatusSelect dbId={dbId} status={status} user={user} />
           </Grid>
           <Grid className='task__grid' xs={3}>
             {dueDate}

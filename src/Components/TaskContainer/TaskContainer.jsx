@@ -32,9 +32,9 @@ const TaskContainer = (props) => {
 						dbId={doc._id}
 						title={doc.title}
 						description={doc.description}
-						// assigned={`${doc.user.firstName} ${doc.user.lastName}`}
 						user={doc.user}
 						status={doc.status}
+						startDate={doc.startDate}
 						dueDate={doc.dueDate}
 					/>
 			))}

@@ -4,16 +4,17 @@ import './TaskDetail.css'
 import { useForm } from 'react-hook-form';
 import { updateTask } from "../../api/api";
 import { useState } from 'react'
+import TaskStatusSelect from "../../Components/TaskStatusSelect/TaskStatusSelect";
 
 
 export default function TaskDetail() {
   const location = useLocation() || null;
   const { register, handleSubmit } = useForm();
-  const { firstName, lastName, description, _id, status, title, startDate, dueDate } = location.state ;
+  const { user, description, dbId, status, title, startDate, dueDate } = location.state ;
   const [data, setData ] = useState([]);
 
   const onSubmit = data => console.log(data);
-  console.log(location.state.firstName)
+  console.log(user)
 
   return (
     <>
@@ -34,14 +35,14 @@ export default function TaskDetail() {
                 className='task__input'
                 label='First Name'
                 type='text'
-                value={firstName && firstName}
+                value={user.firstName && user.firstName}
                 {...register('task-firstName')}
             />
             <Input
                 className='task__input'
                 label='Last Name'
                 type='text'
-                value={lastName && lastName}
+                value={user.lastName && user.lastName}
                 {...register('task-lastName')}
             />
           </article>
@@ -73,13 +74,7 @@ export default function TaskDetail() {
             </article>
             <article>
             {/* set value to selected to match values with state option */}
-            <select className='task__select' style={dropdownBackgroundColor} value={currentStatus.status} onChange={handleChange}>
-              <option className='task__select--option' value="none">Status</option>
-              <option className='task__select--option' value="complete">Complete</option>
-              <option className='task__select--option' value="pending">Pending</option>
-              <option className='task__select--option' value="in progress">In Progress</option>
-              <option className='task__select--option' value="cancelled">Cancelled</option>
-            </select>
+            <TaskStatusSelect status={status} user={user} />
             </article>
       <Button className='task__btn' type='submit'>Edit Task</Button>
         </form>

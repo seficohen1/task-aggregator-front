@@ -28,6 +28,11 @@
   flex-direction: column;
 }
 
+select {
+  margin-top: 1.5rem;
+
+}
+
 .task__btn {
   color: var(--fifth-color);
   font-family: var(--project-font);
@@ -36,7 +41,7 @@
   text-decoration: none;
   letter-spacing: .25rem;
   background-color: var(--contrast-color);
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .task__input {

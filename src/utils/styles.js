@@ -34,4 +34,4 @@ const styles = {
   setStatusDropdownColors,
 }
 
-export default styles
+export default styles;
