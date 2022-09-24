@@ -1,14 +1,41 @@
-.container__task{
+.container__employee{
   display: flex;
   font-family: var(--project-font);
 }
 
-.employee__container {
+.container__gird--employee {
   display: flex;
   align-items: center;
-  height: 4rem;
-  margin: 1rem 0 0 0;
+  height: 5rem;
+  margin: .5rem 0 0 0;
+  padding: 0;
   border-left: 5px solid var(--fifth-color);
   border-radius: .4rem;
-  background-color: var(--fourth-color);
+  background-color: rgba(255, 255, 255, 0.353);
+}
+
+.emp__grid:nth-child(1) {
+  padding-left: 2.4rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.emp__grid:nth-child(2) {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.emp__grid:nth-child(3) {
+  padding-left: 0;
+  font-size: .9rem;
+}
+
+.emp__grid:nth-child(4) {
+  padding: 1.5rem 0 0 0;
+  font-size: 1.1rem;
+  font-weight: 200;
+}
+.emp-edit-modal-btn {
+  all: unset;
+  cursor: pointer;
 }

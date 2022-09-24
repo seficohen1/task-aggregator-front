@@ -15,7 +15,7 @@ background-color: var(--third-color);
 color: var(--fifth-color);
 font-size: 1rem;
 font-weight: 400;
-cursor: default;
+cursor: pointer;
 }
 
 .taskmenu__btn:nth-child(1){
