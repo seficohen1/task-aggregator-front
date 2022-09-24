@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import dataTest from '../../dataTest/dataTest';
 import Task from '../Task/Task';
 import './TaskContainer.css'
@@ -8,14 +9,18 @@ import uniqid from 'uniqid'
 import { fetchTasks } from '../../api/api';
 
 
-const TaskContainer = () => {
+const TaskContainer = (props) => {
+	
 	const [docs, setDocs] = useState([]);
 
 	useEffect(() => {
-		fetchTasks(setDocs)
+		fetchTasks(setDocs)		
 	}, [])
 
-	
+
+
+
+
 	return (
     <>
     <TaskMenu />
@@ -24,11 +29,13 @@ const TaskContainer = () => {
 			{docs.map(doc => (				
 					<Task
 						key={uniqid()}
-						id={doc.id}
+						dbId={doc._id}
 						title={doc.title}
-						assigned={`${doc.user.firstName} ${doc.user.lastName}`}
+						description={doc.description}
+						user={doc.user}
 						status={doc.status}
-						date={doc.date}
+						startDate={doc.startDate}
+						dueDate={doc.dueDate}
 					/>
 			))}
 		</section>

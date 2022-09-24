@@ -1,3 +1,4 @@
+import { set } from "react-hook-form";
 
 
 
@@ -15,4 +16,26 @@ async function fetchTasks (setState) {
 }
 
 
-export { fetchTasks }
+async function updateTask (dbId, body) {
+  console.log(dbId.length)
+  console.log(JSON.stringify(body))
+  const options = {
+    method: 'PATCH',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body)
+  }
+  try {
+    const baseUrl = 'http://localhost:4001/dashboard/tasks/';
+    const res = await fetch(`${baseUrl}${dbId}`, options)
+    const data = await res.json();
+    console.log(data)
+  } catch (error) {
+    console.log(error)
+    
+  }
+}
+
+export { fetchTasks, updateTask }
