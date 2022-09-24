@@ -1,0 +1,15 @@
+.admin__main {
+  height: 45rem;
+  border-radius: .4rem;
+  background-color: rgba(255, 255, 255, 0.256);
+}
+
+.admin__grid--container {
+  display: flex;
+  align-items: center;
+}
+
+.admin__grid {
+  display: flex;
+  justify-content: center;
+}

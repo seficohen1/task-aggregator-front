@@ -11,11 +11,11 @@
   padding: 0;
   border-left: 5px solid var(--fifth-color);
   border-radius: .4rem;
-  background-color: var(--fourth-color);
+  background-color: rgba(255, 255, 255, 0.353);
 }
 
 .container__grid:hover {
-  background-color: #e8ecff;
+  background-color: rgba(255, 255, 255, 0.637);
 }
 
 .dropdown__icon {
@@ -33,7 +33,7 @@
 .task__grid:nth-child(1) {
   padding-left: 2.4rem;
   font-size: 1rem;
-  font-weight: 300;
+  font-weight: 500;
 }
 
 .task__grid:nth-child(2) {
@@ -60,9 +60,9 @@
 
 .task__select {
   width: 7rem;
-  background-color: var(--third-color);
+  background-color: rgba(161, 219, 255, 0.163);
   border-radius: .4rem;
-  border: none;
+  border: 2px solid rgb(205, 220, 238);
 }
 
 .task__select--option:nth-child(2) {

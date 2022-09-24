@@ -1,7 +1,7 @@
 .container__sidebar {
   height: 45rem;
   border-radius: .4rem;
-  background-color: var(--second-color);
+  background-color: rgba(255, 255, 255, 0.363);
   font-family: var(--project-font);
 }
 
@@ -18,7 +18,7 @@
   justify-content: space-between;
   width: 14rem;
   margin-bottom: 1rem;
-  border-bottom: 1px solid #fff;
+  border-bottom: 2px solid var(--fifth-color);
   padding-bottom: .4rem;
 }
 
@@ -26,9 +26,9 @@
 .sidebar__employee--btn {
   background: none;
   border: none;
-  color: #fff;
+  color: var(--fifth-color);
   font-size: 1.2rem;
-  font-weight: 200;
+  font-weight: 400;
 }
 
 .sidebar__task--btn:hover, 

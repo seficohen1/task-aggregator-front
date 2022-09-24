@@ -1,0 +1,30 @@
+.registertask__form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: var(--project-font);
+}
+
+.task__title {
+  margin-bottom: 2rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: .1rem;
+}
+
+.registertask__input{
+  width: 18rem;
+  margin-bottom: 1rem;
+}
+
+.registertask__btn {
+  margin-top: 1.5rem;
+  color: var(--fifth-color);
+  font-family: var(--project-font);
+  font-size: 1rem;
+  font-weight: 300;
+  text-decoration: none;
+  letter-spacing: .4rem;
+  background-color: var(--contrast-color);
+}

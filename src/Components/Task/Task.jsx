@@ -1,14 +1,19 @@
-import { Grid, Dropdown, Collapse } from '@nextui-org/react'
-import React, { useState } from 'react'
+import { Grid, Dropdown, Collapse, Button } from '@nextui-org/react'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import './Task.css'
 
 
-const Task = ({ title, assigned, date, status }) => {
+const Task = (props) => {
+  const { id, title, assigned, status, date } = props;
+  const [color, setColor] = useState()    
+  const navigate = useNavigate();
+ 
 
-  const [color, setColor] = useState()
 
-  return (
-    
+
+
+  return (    
       <main className='container__task'>
         <Grid.Container className='container__grid' gap={2} justify='center'>
           <Grid className='task__grid' xs={5}>
@@ -37,7 +42,12 @@ const Task = ({ title, assigned, date, status }) => {
                 variant='light'
                 aria-label='Actions'
               >
-                <Dropdown.Item key='edit'>Edit</Dropdown.Item>
+
+
+
+                <Dropdown.Item key='edit' textValue='edit task'>
+                  <Link to='/dashboard/task' state={ props }>Edit</Link>
+                </Dropdown.Item>
                 <Dropdown.Item key='delete' color='error'>Delete</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
