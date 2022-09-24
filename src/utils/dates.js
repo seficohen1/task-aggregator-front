@@ -2,11 +2,15 @@
 
 
 const getLongDate = (date) => {
-  let longDate;
-
-  console.log(date)
-
-  // return LongDate;
+  const options = {
+    weekday: 'short', 
+    year: 'numeric', 
+    month: 'short', 
+    day: 'numeric' 
+  };
+    let longDate = new Date(date).toLocaleDateString("en-UK", options);
+  
+  return longDate;
 }
 
 

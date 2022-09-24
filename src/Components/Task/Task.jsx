@@ -8,10 +8,16 @@ import { styles, dates } from '../../utils/index'
 
 
 const Task = (props) => {
-  const { dbId, title, user, dueDate } = props;
-  // set status to update dropdown value
+  const { dbId, title, user } = props;
+  // set status to update dropdown 
   const [currentStatus, setCurrentStatus] = useState({ status: 'none' })
 
+   // set and maintain bg color on state changes, imported from utils
+   const dropdownBackgroundColor = styles.setStatusDropdownColors(currentStatus.status)
+
+   // format date for dashboard, using func from utils
+   const dueDate = dates.getLongDate(props.dueDate)
+   
   // load status value on render
   useEffect(() => {
     setCurrentStatus({ status: props.status })
@@ -26,8 +32,8 @@ const Task = (props) => {
     updateTask(dbId, body)
   }
 
-  // set and maintain bg color on state changes, imported from utils
-  const dropdownBackgroundColor = styles.setStatusDropdownColors(currentStatus.status)
+console.log(dueDate)
+  
   
   return (
       <main className='container__task'>
