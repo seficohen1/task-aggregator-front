@@ -30,6 +30,8 @@ const setStatusDropdownColors = (statusState) => {
   }
 }
 
+const styles = {
+  setStatusDropdownColors,
+}
 
-
-export { setStatusDropdownColors }
+export default styles

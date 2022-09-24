@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './Task.css'
 import { updateTask } from '../../api/api'
-import { setStatusDropdownColors } from '../../utils/styles'
+// import { setStatusDropdownColors } from '../../utils/styles'
+import { styles, dates } from '../../utils/index'
 
 
 const Task = (props) => {
@@ -26,7 +27,7 @@ const Task = (props) => {
   }
 
   // set and maintain bg color on state changes, imported from utils
-  const dropdownBackgroundColor = setStatusDropdownColors(currentStatus.status)
+  const dropdownBackgroundColor = styles.setStatusDropdownColors(currentStatus.status)
   
   return (
       <main className='container__task'>
