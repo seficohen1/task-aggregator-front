@@ -1,3 +1,4 @@
+
 .task__container {
   display: flex;
   justify-content: center;
@@ -25,12 +26,29 @@
 
 .task__article {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;  
 }
 
-select {
-  margin-top: 1.5rem;
+.errors {
+  margin: 2rem  0 0 0;
+  color: blue;
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-start; */
+  gap: 1rem;
+  
+}
 
+
+
+.task__select {
+  margin: 0.5rem 0 0 2rem;
+  padding: 0 1rem;
+  height: 2.5rem;
+  width: 10rem;
 }
 
 .task__btn {
@@ -49,7 +67,7 @@ select {
   margin: 0 0 1rem; 
 }
 
-.task__input:nth-child(2) {
+.task__input:nth-child(2) { 
   margin-left: 1.25rem;
 }
 

@@ -1,82 +1,102 @@
+import "./TaskDetail.css";
 import { useLocation } from "react-router-dom";
 import { Button, Input, Grid, Textarea } from "@nextui-org/react";
-import "./TaskDetail.css";
 import { useForm } from "react-hook-form";
 import { updateTask } from "../../api/api";
-import { useState } from "react";
 import TaskStatusSelect from "../../Components/TaskStatusSelect/TaskStatusSelect";
+import { dates } from '../../utils/index'
 
 export default function TaskDetail() {
   const location = useLocation() || null;
-  const { register, handleSubmit } = useForm();
-  const { user, description, dbId, status, title, startDate, dueDate } =
-    location.state;
-  const [data, setData] = useState([]);
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { user, description, dbId, status, title, dueDate } = location.state;    
+  const formattedDate = dates.getFormattedDate(dueDate)  
 
-  const onSubmit = (data) => console.log(data);
-
+  const onSubmit = (data) => {
+    const updatedTask = {
+      title: data.taskTitle,
+      description: data.description,
+      status: data.status,
+      dueDate: data.dueDate,
+    }
+    updateTask(dbId, updatedTask)
+  }
+   
+    
   return (
     <>
       <Grid.Container className="task__container">
         <form className="task__form" onSubmit={handleSubmit(onSubmit)}>
           <h2 className="task__title">TASK DETAILS</h2>
-          <article>
+          <article className="task__article">
             <Input
               className="task__input wide "
               label="Task:"
               type="text"
+              placeholder="Task Title"
               value={title && title}
-              {...register("task-title")}
+              {...register("taskTitle", {
+                required: 'Task name is required'
+              }) }
             />
           </article>
-          <article>
+          <article className="task__article">
             <Input
               className="task__input"
               label="First Name"
               type="text"
+              placeholder="First Name"
               value={user.firstName && user.firstName}
-              {...register("task-firstName")}
+              readOnly
             />
             <Input
               className="task__input"
               label="Last Name"
               type="text"
+              placeholder="Last Name"
               value={user.lastName && user.lastName}
-              {...register("task-lastName")}
+              readOnly           
             />
           </article>
-          <article>
+          <article className="task__article">
             <Textarea
               className="task__input wide"
               label="Description:"
               type="text"
+              placeholder="Task Description"
               value={description && description}
-              {...register("task-description")}
+              {...register("description", {
+                required: 'Task description is required'
+              }) }              
             />
           </article>
-          <article>
-            <Input
-              className="task__input"
-              label="Start Date"
-              type="date"
-              value={startDate && startDate}
-              {...register("start-date")}
-            />
+          <article className="task__article">            
             <Input
               className="task__input"
               label="Due Date"
               type="date"
-              value={dueDate && dueDate}
-              {...register("due-date")}
+              placeholder={Date()}
+              value={formattedDate && formattedDate}
+              min={Date()}
+              max="2022-12-31"
+              {...register("dueDate", {
+                required: 'Due date is required', 
+                valueAsDate: true,
+              }) }
             />
-          </article>
-          <article>
             {/* set value to selected to match values with state option */}
-            <TaskStatusSelect status={status} user={user} />
+            <TaskStatusSelect dbId={dbId} status={status} user={user} />
           </article>
-          <Button className="task__btn" type="submit">
-            Edit Task
-          </Button>
+          <article className="task__article">
+          <Button className="task__btn" type="submit">Edit Task</Button>
+          </article>
+          <article className="task__article errors">
+            {errors.taskTitle && <div>{errors.taskTitle.message}</div>}
+            {errors.firstName && <div>{errors.firstName.message}</div>}
+            {errors.lastName && <div>{errors.lastName.message}</div>}
+            {errors.description && <div>{errors.description.message}</div>}
+            {errors.dueDate && <div>{errors.dueDate.message}</div>}
+          </article>
         </form>
       </Grid.Container>
     </>

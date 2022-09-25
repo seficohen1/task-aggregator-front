@@ -14,7 +14,7 @@ const getLongDate = (date) => {
 }
 
 const getFormattedDate = (date) => {
-  return new Date(date);
+  return new Date(date).toISOString().slice(0, 10)
 }
 
 

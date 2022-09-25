@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
 import { styles } from '../../utils/index'
 import { updateTask } from '../../api/api'
+import { useForm } from "react-hook-form";
+
 
 
 
 const TaskStatusSelect = (props) => {
   const { dbId } = props;
+  const { register } = useForm();
   const [currentStatus, setCurrentStatus] = useState({ status: 'none' })
 
   const dropdownBackgroundColor = styles.setStatusDropdownColors(currentStatus.status)
@@ -24,7 +27,7 @@ const TaskStatusSelect = (props) => {
 
 
   return (
-    <select className='task__select' style={dropdownBackgroundColor} value={currentStatus.status} onChange={handleChange}>
+    <select {...register('status')} className='task__select' style={dropdownBackgroundColor} value={currentStatus.status} onChange={handleChange} >
       <option className='task__select--option' value="none">Status</option>
       <option className='task__select--option' value="complete">Complete</option>
       <option className='task__select--option' value="pending">Pending</option>

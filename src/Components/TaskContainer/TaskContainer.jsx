@@ -26,7 +26,6 @@ const TaskContainer = (props) => {
             description={doc.description}
             user={doc.user}
             status={doc.status}
-            startDate={doc.startDate}
             dueDate={doc.dueDate}
           />
         ))}
