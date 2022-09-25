@@ -5,7 +5,7 @@ import { updateTask } from '../../api/api'
 
 
 const TaskStatusSelect = (props) => {
-  console.log(props)
+  // console.log(props)
   const { dbId } = props;
   const [currentStatus, setCurrentStatus] = useState({ status: 'none' })
 

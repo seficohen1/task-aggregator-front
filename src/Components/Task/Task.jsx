@@ -6,10 +6,10 @@ import { dates } from "../../utils/index";
 
 const Task = (props) => {
   const { dbId, user, title, status } = props;
-  console.log(props);
+  // console.log(props);
   // format date for dashboard, using func from utils
   const dueDate = dates.getLongDate(props.dueDate);
-  console.log(Date());
+  // console.log(Date());
 
   return (
     <main className="container__task">
