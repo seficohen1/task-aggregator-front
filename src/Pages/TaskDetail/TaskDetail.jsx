@@ -14,7 +14,6 @@ export default function TaskDetail() {
   const [data, setData] = useState([]);
 
   const onSubmit = (data) => console.log(data);
-  console.log(user);
 
   return (
     <>

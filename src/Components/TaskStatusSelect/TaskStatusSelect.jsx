@@ -5,7 +5,6 @@ import { updateTask } from '../../api/api'
 
 
 const TaskStatusSelect = (props) => {
-  console.log(props)
   const { dbId } = props;
   const [currentStatus, setCurrentStatus] = useState({ status: 'none' })
 
@@ -15,13 +14,11 @@ const TaskStatusSelect = (props) => {
     setCurrentStatus({ status: props.status })
   }, [])
 
-  function handleChange (e) {
-    
+  function handleChange (e) {    
     setCurrentStatus({ status: e.target.value })
     const body = {
       status: e.target.value
     }
-    console.log(dbId)
     updateTask(dbId, body)
   }
 
