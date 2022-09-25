@@ -1,13 +1,18 @@
 import "./TaskDetail.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Input, Grid, Textarea } from "@nextui-org/react";
+import Swal from 'sweetalert2'
 import { useForm } from "react-hook-form";
 import { updateTask } from "../../api/api";
 import TaskStatusSelect from "../../Components/TaskStatusSelect/TaskStatusSelect";
 import { dates } from '../../utils/index'
+import { alerts } from "../../utils/index";
+
 
 export default function TaskDetail() {
+  
   const location = useLocation() || null;
+  const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();
   const { user, description, dbId, status, title, dueDate } = location.state;    
   const formattedDate = dates.getFormattedDate(dueDate)  
@@ -19,10 +24,19 @@ export default function TaskDetail() {
       status: data.status,
       dueDate: data.dueDate,
     }
-    updateTask(dbId, updatedTask)
-  }
-   
+    Swal.fire(alerts.updatedTaskConfirmAlert).then(result => {
+      if (result.isConfirmed) {
+        updateTask(dbId, updatedTask);
+        Swal.fire(alerts.updatedTaskSuccess);
+        setTimeout(() => {
+          navigate(-1)
+        }, 2000);
+      }
+    })
     
+  }
+
+
   return (
     <>
       <Grid.Container className="task__container">
@@ -88,7 +102,8 @@ export default function TaskDetail() {
             <TaskStatusSelect dbId={dbId} status={status} user={user} />
           </article>
           <article className="task__article">
-          <Button className="task__btn" type="submit">Edit Task</Button>
+            <Button className="task__btn" type="button" onPress={() => navigate(-1)}>Back</Button>
+            <Button className="task__btn" type="submit">Save</Button>
           </article>
           <article className="task__article errors">
             {errors.taskTitle && <div>{errors.taskTitle.message}</div>}

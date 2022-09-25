@@ -22,12 +22,14 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+
 }
 
 .task__article {
   display: flex;
   align-items: center;
   justify-content: center;  
+  
 }
 
 .errors {
@@ -59,7 +61,7 @@
   text-decoration: none;
   letter-spacing: .25rem;
   background-color: var(--contrast-color);
-  margin-top: 2rem;
+  margin: 2rem 2rem 0 0;
 }
 
 .task__input {

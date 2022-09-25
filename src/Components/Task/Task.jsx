@@ -36,7 +36,7 @@ const Task = (props) => {
               aria-label="Actions"
             >
               <Dropdown.Item key="edit" textValue="edit task">
-                <Link to="dashboard/task" state={props}>
+                <Link to="task" state={props}>
                   Edit
                 </Link>
               </Dropdown.Item>

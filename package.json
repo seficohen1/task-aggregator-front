@@ -17,6 +17,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.36.0",
     "react-router-dom": "^6.4.0",
+    "sweetalert2": "^11.4.33",
     "uniqid": "^5.4.0"
   },
   "devDependencies": {
