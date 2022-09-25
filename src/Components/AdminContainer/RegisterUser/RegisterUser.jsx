@@ -1,40 +1,35 @@
 import { Button, Input } from "@nextui-org/react";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+import { createNewUser } from "../../../api/api";
+
+
 // import { useForm } from "react-hook-form";
 import "./RegisterUser.css";
-import axios from "axios";
 
 const RegisterUser = () => {
-  // const navigate = useNavigate();
   const [newUser, setNewUser] = useState({
-    name: "",
-    lastname: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     role: "",
   });
-
+  
   const handleChange = (event) => {
-		console.log(event.target.value)
     const { name, value } = event.target;
-		console.log(name, value)
+    
     setNewUser((prev) => {
-      return { ...prev, name: value };
+      return { ...prev, [name]: value };
     });
   };
+  
+  const navigate = useNavigate();
 
-  // useEffect(() => {
-  // 	console.log(newUser)
-  // }, [newUser])
-
-  const handleClick = (event) => {
-    // event.preventDefault();
-		// console.log(newUser)
-
-    axios
-      .post("http://localhost:4001/dashboard/users", newUser)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+  const handleClick = () => {
+    createNewUser(newUser);
+    
+    navigate("/dashboard", { replace: true });
   };
 
   return (
@@ -43,16 +38,16 @@ const RegisterUser = () => {
         <h2 className="register__title">REGISTER USER</h2>
         <Input
           className="register__input"
-          name="name"
-          value={newUser.name}
+          name="firstName"
+          value={newUser.firstName}
           label="Name"
           type="text"
           onChange={handleChange}
         />
         <Input
           className="register__input"
-          name="lastname"
-          value={newUser.lastname}
+          name="lastName"
+          value={newUser.lastName}
           label="Lastname"
           type="text"
           onChange={handleChange}
@@ -81,7 +76,7 @@ const RegisterUser = () => {
           type="text"
           onChange={handleChange}
         />
-        <Button className="register__btn" onClick={handleClick} type='submit'>
+        <Button className="register__btn" onPress={handleClick}>
           Create
         </Button>
       </form>
