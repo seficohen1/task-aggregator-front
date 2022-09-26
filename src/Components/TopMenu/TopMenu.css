@@ -1,5 +1,5 @@
 .container__navbar {
-  /* background-color: transparent; */
+  /* background: linear-gradient(to left, #8ca6dbb9, #B993D6b9); */
   font-family: var(--project-font);
   height: 6.3rem;
 }
@@ -15,14 +15,22 @@
 }
 
 .btn__navbar {
-  background-color: var(--contrast-color);
+  background-color: var(--fifth-color);
   font-weight: 400;
   letter-spacing: .15rem;
-  color: var(--fifth-color);
+  color: var(--contrast-color);
 }
 
 .btn__navbar:hover {
-  background-color: var(--fifth-color);
-  color: var(--contrast-color);
+  background-color: var(--contrast-color);
+  color: var(--fifth-color);
   cursor: default;
+}
+
+.logo__navbar {
+  
+}
+
+.logo__navbar--image{
+  height: 6.2rem;
 }

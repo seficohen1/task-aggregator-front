@@ -10,6 +10,8 @@ const Task = (props) => {
   // format date for dashboard, using func from utils
   const dueDate = dates.getLongDate(props.dueDate);
 
+  const navigate = useNavigate();
+
   const deleteTask = (id) => {
     // console.log(id)
 
@@ -48,7 +50,7 @@ const Task = (props) => {
               aria-label="Actions"
             >
               <Dropdown.Item key="edit" textValue="edit task">
-                <Link to="/task" state={props}>
+                <Link to='/task' state={props}>
                   Edit
                 </Link>
               </Dropdown.Item>

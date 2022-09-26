@@ -1,6 +1,7 @@
 import React from 'react';
-import { Navbar, Button } from '@nextui-org/react';
+import { Navbar, Button, Image } from '@nextui-org/react';
 import { Link, Outlet } from 'react-router-dom';
+import logoTopMenu from '../../assets/images/logo-navbar.png'
 import './TopMenu.css'
 
 const TopMenu = () => {
@@ -8,7 +9,13 @@ const TopMenu = () => {
 		<>
 		<Navbar className='container__navbar'>
 			<Navbar.Brand>
-				<div className='logo__navbar'>LOGO</div>
+				<div className='logo__navbar'>
+					<Image
+						className='logo__navbar--image'
+						src={logoTopMenu}
+						alt='logotype'
+					 />
+				</div>
 			</Navbar.Brand>
 			<Navbar.Content>
 				<Navbar.Item>

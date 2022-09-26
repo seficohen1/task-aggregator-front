@@ -38,11 +38,12 @@ const Employee = ({ firstName, lastName, email, role, id }) => {
           {(user?.role === "admin" || user._id === id) && (
             <>
               <Button
-                className="emp-edit-modal-btn"
+                size='xs'
+                className="employee__edit--p"
                 onPress={handler}
                 onClose={closeHandle}
               >
-                <i className="dropdown__icon bx bx-dots-horizontal-rounded edit_emp"></i>
+                EDIT
               </Button>
               <UserModal
                 visible={visible}

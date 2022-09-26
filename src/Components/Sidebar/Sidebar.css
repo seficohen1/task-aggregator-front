@@ -1,7 +1,7 @@
 .container__sidebar {
-  height: 45rem;
+  height: 46.2rem;
   border-radius: .4rem;
-  background-color: rgba(255, 255, 255, 0.363);
+  background-color: rgba(116, 154, 235, 0.223);
   font-family: var(--project-font);
 }
 

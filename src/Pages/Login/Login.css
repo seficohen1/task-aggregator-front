@@ -5,12 +5,11 @@
   justify-content: center;
   height: 100vh;
   font-family: var(--project-font);
-  background: #B993D6;  /* fallback for old browsers */
-background: linear-gradient(to right, #8CA6DB, #B993D6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, #8ca6db, #b993d6);
 }
 
 .login__card {
-  background-color: rgba(255, 255, 255, 0.418);
+  background-color: rgba(255, 255, 255, 0.364);
 }
 
 .login__form {
@@ -18,23 +17,23 @@ background: linear-gradient(to right, #8CA6DB, #B993D6); /* W3C, IE 10+/ Edge, F
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 30rem;
+  height: 40rem;
 }
 
 .title__form {
   margin: 2rem 0;
-  color:var(--contrast-color);
+  color: var(--contrast-color);
   font-size: 2.3rem;
   font-weight: 200;
-  letter-spacing: .6rem;
+  letter-spacing: 0.6rem;
 }
 
 .input__form--name,
-.input__form--pass{
+.input__form--pass {
   width: 18rem;
 }
 
-.input__form--name{
+.input__form--name {
   margin-bottom: 1.5rem;
 }
 
@@ -42,15 +41,15 @@ background: linear-gradient(to right, #8CA6DB, #B993D6); /* W3C, IE 10+/ Edge, F
   text-decoration: none;
 }
 
-.btn__form{
+.btn__form {
   height: 2.8rem;
-  margin: 4rem 0 0;
+  margin: 3rem 0 2rem;
   color: var(--fifth-color);
   font-family: var(--project-font);
   font-size: 1.1rem;
   font-weight: 300;
   text-decoration: none;
-  letter-spacing: .4rem;
+  letter-spacing: 0.4rem;
   background-color: var(--contrast-color);
 }
 
