@@ -3,79 +3,67 @@ import { Button, Container, Input } from "@nextui-org/react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-// import {dates} from "../../../utils/index"
+import Swal from "sweetalert2";
+
+import { dates, alerts, dataHelpers } from "../../../utils/index";
 import axios from "axios";
 import uniqid from "uniqid";
 
 // import TaskStatusSelect from "../../TaskStatusSelect/TaskStatusSelect";
 import "./RegisterTask.css";
+import { getUserFromName, createTask } from "../../../api/api";
 
 const RegisterTask = () => {
-  
   const navigate = useNavigate();
-
+  //   const formattedDate = dates.getFormattedDate(dueDate)
 
   const [task, setTask] = useState({
     title: "",
     description: "",
     firstName: "",
-    lastName: "",    
+    lastName: "",
     date: "",
-    status: ""
+    status: "",
   });
 
-    const handleChange = (e) => {
-      // console.log(e.target)
-  	// e.preventDefault()
-      const { name, value } = e.target;
-  	// console.log(value)
-      setTask((prev) => {
-        return {
-          ...prev,
-          [name]: value,
-        };
-      });
-    };
+  const handleChange = (e) => {    
+    // e.preventDefault()
+    const { name, value } = e.target;    
+    setTask((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
 
-
-  const createTask = (e) => {
+  const createTask = async (e) => {
     e.preventDefault();
     console.log("Add task!");
-    console.log(task);
+    console.log("task state", task);
 
-	const taskPost = {
-		title: task.title,
-		description: task.description,
-		// user: {
-		// firstName: task.firstName,
-		// lastName: task.lastName,
-		// },
-		// date: task.date,
-		// status: ""
-	}
+    const urlPath = "http://localhost:4001/dashboard/users";
+    const user = await getUserFromName(urlPath, task);
+    console.log(user);
 
+    if (user.userByName.length === 0) {
+      return Swal.fire(alerts.warningCreateUser);
+    } 
+
+	const taskPost = dataHelpers.createUpdatedTask(task, user) 
 	console.log(taskPost)
 
-    axios
-      .post("http://localhost:4001/dashboard/tasks", taskPost)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+	createTask(taskPost)   
+	Swal.fire(alerts.updatedTaskSuccess)
 
-    navigate("/dashboard");
-    window.location.reload();
+    // navigate("/dashboard");
+    // window.location.reload();
   };
- 	
-
-
-  
 
   return (
     <main className="registertask__container">
       <form className="registertask__form">
         <h2 className="task__title">NEW TASK</h2>
-
-
-        
         <Input
           className="registertask__input"
           label="Title"
@@ -100,10 +88,10 @@ const RegisterTask = () => {
           type="text"
           id="firstName"
           name="firstName"
-		  value={task.firstName}
+          value={task.firstName}
           onChange={handleChange}
-        /> 
-         <Input
+        />
+        <Input
           className="registertask__input"
           label="Last name"
           type="text"
