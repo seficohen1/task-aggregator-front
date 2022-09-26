@@ -5,20 +5,22 @@ import Task from "../Task/Task";
 import "./TaskContainer.css";
 import TaskBar from "./TaskBar/TaskBar";
 import uniqid from "uniqid";
-import { fetchTasks } from "../../api/api";
+import { fetchAll } from "../../api/api";
 
 const TaskContainer = (props) => {
   const [docs, setDocs] = useState([]);
 
   useEffect(() => {
-    fetchTasks(setDocs);
+    fetchAll('tasks', setDocs);
   }, []);
 
+  
   return (
     <>
       <TaskBar />
       <section className="container__taskcontainer">
-        {docs.map((doc) => (
+        {docs && docs.map((doc) => (
+          
           <Task
             key={uniqid()}
             dbId={doc._id}

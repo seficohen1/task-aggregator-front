@@ -1,42 +1,60 @@
 import "./TaskDetail.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from 'react'
+import { useLocation } from "react-router-dom";
 import { Button, Input, Grid, Textarea } from "@nextui-org/react";
 import Swal from 'sweetalert2'
 import { useForm } from "react-hook-form";
 import { updateTask } from "../../api/api";
 import TaskStatusSelect from "../../Components/TaskStatusSelect/TaskStatusSelect";
 import { dates } from '../../utils/index'
+import { dataHelpers } from '../../utils/data'
 import { alerts } from "../../utils/index";
 
 
 export default function TaskDetail() {
   
   const location = useLocation() || null;
-  const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors } } = useForm();
   const { user, description, dbId, status, title, dueDate } = location.state;    
   const formattedDate = dates.getFormattedDate(dueDate)  
-
-  const onSubmit = (data) => {
-    const updatedTask = {
-      title: data.taskTitle,
+console.log(location.state)
+  const [newUser, setNewUser] = useState([]);
+  
+  const createUpdatedTask = (data, newUser) => {
+    let updatedTask = {
+      title: data.title,
       description: data.description,
       status: data.status,
-      dueDate: data.dueDate,
+      dueDate: data.dueDate,    
     }
-    Swal.fire(alerts.updatedTaskConfirmAlert).then(result => {
-      if (result.isConfirmed) {
-        updateTask(dbId, updatedTask);
-        Swal.fire(alerts.updatedTaskSuccess);
-        setTimeout(() => {
-          navigate(-1)
-        }, 2000);
-      }
-    })
-    
+    const updatedUserId = { _id: newUser.userByName[0]._id } || null;
+    if (updatedUserId) updatedTask.user = updatedUserId;
+    return updatedTask;
+}
+
+
+  const { 
+    register, 
+    handleSubmit, 
+    formState: { errors } } = useForm( {defaultValues: {
+      title: title,
+      description: description,
+      status: status,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      dueDate: formattedDate,
+  }});
+
+
+  const onSubmit = (data) => {
+    if (dataHelpers.isChangedUser(user, data)) {
+      dataHelpers.checkForUserInDb(data, setNewUser)
+    }
+    const updatedTask = createUpdatedTask(data, newUser)    
+    updateTask(dbId, updatedTask)
+    console.log('Updated user from form has been submitted')
   }
-
-
+   
+  
   return (
     <>
       <Grid.Container className="task__container">
@@ -48,8 +66,7 @@ export default function TaskDetail() {
               label="Task:"
               type="text"
               placeholder="Task Title"
-              value={title && title}
-              {...register("taskTitle", {
+              {...register("title", {
                 required: 'Task name is required'
               }) }
             />
@@ -60,16 +77,20 @@ export default function TaskDetail() {
               label="First Name"
               type="text"
               placeholder="First Name"
-              value={user.firstName && user.firstName}
-              readOnly
+              {...register("firstName", {
+                required: 'First name is required'
+              }) }  
+              // readOnly
             />
             <Input
               className="task__input"
               label="Last Name"
               type="text"
               placeholder="Last Name"
-              value={user.lastName && user.lastName}
-              readOnly           
+              {...register("lastName", {
+                required: 'Last name is required'
+              }) }  
+              // readOnly           
             />
           </article>
           <article className="task__article">
@@ -78,7 +99,6 @@ export default function TaskDetail() {
               label="Description:"
               type="text"
               placeholder="Task Description"
-              value={description && description}
               {...register("description", {
                 required: 'Task description is required'
               }) }              
@@ -90,7 +110,6 @@ export default function TaskDetail() {
               label="Due Date"
               type="date"
               placeholder={Date()}
-              value={formattedDate && formattedDate}
               min={Date()}
               max="2022-12-31"
               {...register("dueDate", {

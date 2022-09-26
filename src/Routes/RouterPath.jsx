@@ -9,13 +9,22 @@ import Login from "../Pages/Login/Login";
 const RouterPath = () => {
   return (
     <Routes>
+      
       <Route index element={<Login />} />
+<<<<<<< HEAD
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="/task" element={<TaskDetail />} />
       {/* <Route path="dashboard/:userId" element={<UserDetail />} /> */}
+=======
+      <Route path="dashboard" element={<Dashboard />} />
+      <Route path="admin" element={<Admin />} />
+      <Route path="task" element={<TaskDetail />} />
+        {/* <Route path="dashboard/:userId" element={<UserDetail />} /> */}
+
+>>>>>>> task-detail
     </Routes>
-  );
+  );  
 };
 
 export default RouterPath;
