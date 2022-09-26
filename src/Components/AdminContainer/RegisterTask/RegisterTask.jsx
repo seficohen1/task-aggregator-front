@@ -15,7 +15,7 @@ import { getUserFromName, createNewTask } from "../../../api/api";
 
 const RegisterTask = () => {
   const navigate = useNavigate();
-  //   const formattedDate = dates.getFormattedDate(dueDate)
+  const minDate = dates.getFormattedDate(new Date(Date.now())) 
 
   const [task, setTask] = useState({
     title: "",
@@ -48,10 +48,10 @@ const RegisterTask = () => {
     } 
 
 	const taskPost = dataHelpers.createUpdatedTask(task, user) 
-	Swal.fire(alerts.taskCreated);
-  createNewTask(task)   
-	
-};
+	console.log("taskPost", taskPost)
+
+	createNewTask(taskPost)
+  };
 
   return (
     <main className="registertask__container">
@@ -99,6 +99,7 @@ const RegisterTask = () => {
           type="date"
           id="date"
           name="date"
+          min={minDate}
           value={task.date}
           onChange={handleChange}
         />

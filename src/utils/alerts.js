@@ -35,8 +35,8 @@ const taskCreated = {
   icon: 'success',
   iconColor: '#99CDEB',
   toast: true,
-  timer: 3000,
-  // showConfirmButton: false,
+  timer: 5000,
+  showConfirmButton: false,
 }
 
 const taskDeleted = {
