@@ -25,7 +25,7 @@ async function fetchAll (urlPath, setState) {
   }
 }
 
-async function createTask(taskPost){ 
+async function createNewTask(taskPost){ 
 axios
       .post("http://localhost:4001/dashboard/tasks", taskPost)
       .then((res) => console.log(res))
@@ -99,4 +99,4 @@ const getUserFromName = async (urlPath, data) => {
   }
 }
 
-export { fetchAll, createTask, updateTask, updateUser, getAllUsers, createNewUser, getUserFromName };
+export { fetchAll, createNewTask, updateTask, updateUser, getAllUsers, createNewUser, getUserFromName };

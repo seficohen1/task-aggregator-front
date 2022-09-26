@@ -11,7 +11,7 @@ import uniqid from "uniqid";
 
 // import TaskStatusSelect from "../../TaskStatusSelect/TaskStatusSelect";
 import "./RegisterTask.css";
-import { getUserFromName, createTask } from "../../../api/api";
+import { getUserFromName, createNewTask } from "../../../api/api";
 
 const RegisterTask = () => {
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const RegisterTask = () => {
   };
 
   const createTask = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     console.log("Add task!");
     console.log("task state", task);
 
@@ -51,13 +51,13 @@ const RegisterTask = () => {
     } 
 
 	const taskPost = dataHelpers.createUpdatedTask(task, user) 
-	console.log(taskPost)
+	console.log("taskPost", taskPost)
 
-	createTask(taskPost)   
+	createNewTask(task)   
 	Swal.fire(alerts.updatedTaskSuccess)
 
-    // navigate("/dashboard");
-    // window.location.reload();
+    navigate("/dashboard");
+    window.location.reload();
   };
 
   return (
