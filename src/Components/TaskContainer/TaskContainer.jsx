@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import dataTest from '../../dataTest/dataTest';
 import Task from '../Task/Task';
 import './TaskContainer.css'
@@ -6,16 +6,20 @@ import TaskBar from './TaskBar/TaskBar';
 import TaskMenu from './TaskMenu/TaskMenu';
 import uniqid from 'uniqid'
 import { fetchTasks } from '../../api/api';
+import { getTasks } from '../../api/apiRequests';
+import { TaskContext } from '../../context/TaskContext';
 
 
 const TaskContainer = () => {
 	const [docs, setDocs] = useState([]);
+	const { token } = useContext(TaskContext)
+	
+	const tokenNum = token.token
 
 	useEffect(() => {
-		fetchTasks(setDocs)
+		getTasks(setDocs, tokenNum)
 	}, [])
 
-	
 	return (
     <>
     <TaskMenu />

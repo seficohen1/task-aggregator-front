@@ -1,22 +1,51 @@
 import { Card, Button, Input, Text } from '@nextui-org/react';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState,useContext} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { userLogin } from '../../api/apiRequests';
+import { TaskContext } from '../../context/TaskContext';
 import './Login.css';
 
 const Login = () => {
+	const {token} = useContext(TaskContext)
+	const [user, setUser] = useState({email: "", password: ""})
+	const [error, setError] = useState("")
+	console.log(user)
+	
+	const login = () => {
+		if (user.email === '' || user.password === '') {
+			setError('Please write your email and password')
+			setTimeout(() => {
+				setError('')
+			}, 5000);
+		} else if (!/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/i.test(user.email)){
+			setError('Please write a valid email')
+			setTimeout(() => {
+				setError('')
+			}, 5000);
+		} else {
+			userLogin(user, setError)
+			
+			setTimeout(() => {
+				setError('')
+			}, 7000);
+		}
+		
+	}
+
 	return (
 		<main className='container__form'>
 			<Card className='login__card' css={{ w:'30rem' }}>
 				<Card.Body>
 					<form className='login__form'>
 						<h3 className='title__form'>LOGIN</h3>
-						<Input className='input__form--name' label='Username' type='text' name='username' id='username' />
-						<Input className='input__form--pass' label='Password' type='text' name='password' id='password' />
-						<Link className='link__form' to='dashboard'>
-							<Button className='btn__form'>
-								SIGN UP
-							</Button>
-						</Link>
+						<p style={{color: 'red', fontSize: '1.2rem'}}>{error}</p>
+						<Input className='input__form--name' label='Username' type='text' name='username' id='username' onChange={(e) =>
+                setUser({ ...user, email: e.target.value })} value={user.email}/>
+						<Input className='input__form--pass' label='Password' type='password' name='password' id='password' onChange={(e) =>
+                setUser({ ...user, password: e.target.value })} value={user.password} />
+						<Button onClick={login} className='btn__form'>
+							SIGN IN
+						</Button>
 					</form>
 				</Card.Body>
 			</Card>
