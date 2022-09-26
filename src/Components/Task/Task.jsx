@@ -1,24 +1,17 @@
 import { Grid, Dropdown, Collapse, Button } from "@nextui-org/react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Task.css";
-import axios from "axios";
+import { deleteTask } from "../../api/api";
 import TaskStatusSelect from "../TaskStatusSelect/TaskStatusSelect";
-import { dates } from "../../utils/index";
+import { dates, alerts } from "../../utils/index";
+import Swal from "sweetalert2";
 
 const Task = (props) => {
   const { dbId, user, title, status } = props;
   // format date for dashboard, using func from utils
   const dueDate = dates.getLongDate(props.dueDate);
 
-  const deleteTask = (id) => {
-    
-    axios
-      .delete(`http://localhost:4001/dashboard/tasks/${id}`)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-
-    window.location.reload();
-  };
+  
 
   return (
     <main className="container__task">
@@ -52,7 +45,14 @@ const Task = (props) => {
                 </Link>
               </Dropdown.Item>
               <Dropdown.Item key="delete" color="error">
-                <Button onClick={() => deleteTask(dbId)}>Delete</Button>
+                <Button onClick={() => {
+                  Swal.fire(alerts.confirmAlert).then((result)=> {
+                    if (result.isConfirmed) {
+                      deleteTask(dbId)
+                      Swal.fire(alerts.taskDeleted)
+                    }
+                  })
+            }}>Delete</Button>
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>

@@ -1,24 +1,16 @@
 
 
-
-
-
-// const updatedTaskConfirmAlert = {
-//   title: 'Are you sure?',
-//   text: `You won't be able to undo this.`,
-//   icon: 'warning',
-//   iconColor: '#99CDEB',
-//   showClass: {
-//     popup: 'animate__animated animate__fadeInDown'
-//   },
-//   hideClass: {
-//     popup: 'animate__animated animate__fadeOutUp'
-//   },
-//   showCancelButton: true,
-//   confirmButtonColor: '#4848E0',
-//   cancelButtonColor: '#CC1E1E',
-//   confirmButtonText: 'Yes, save the task!'
-// }
+const confirmAlert = {
+  title: 'Are you sure?',
+  text: `You won't be able to undo this.`,
+  icon: 'warning',
+  iconColor: '#99CDEB',
+  showCancelButton: true,
+  confirmButtonColor: '#4848E0',
+  cancelButtonColor: '#CC1E1E',
+  timer: false,
+  confirmButtonText: `Yes, I'm sure!`
+}
 
 const warningCreateUser = {
   title: 'User does not exist',
@@ -38,11 +30,22 @@ const updatedTaskSuccess = {
   
 }
 
+const taskDeleted = {
+  title: 'Well done!',
+  text: `The task has been deleted`,
+  icon: 'success',
+  iconColor: '#99CDEB',
+  toast: true,
+  timer: 3000,
+  showConfirmButton: false,
+}
+
 
 const alerts = {
-  // updatedTaskConfirmAlert, 
+  confirmAlert, 
   updatedTaskSuccess,
-  warningCreateUser
+  warningCreateUser,
+  taskDeleted
 }
 
 

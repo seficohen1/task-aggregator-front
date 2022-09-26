@@ -44,6 +44,13 @@ async function updateTask(dbId, body) {
   }
 }
 
+const deleteTask = (id) => {    
+  axios
+    .delete(`http://localhost:4001/dashboard/tasks/${id}`)
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+};
+
 // edit user  details
 
 const updateUser = async (url, options) => {
@@ -92,4 +99,4 @@ const getUserFromName = async (urlPath, data) => {
   }
 }
 
-export { fetchAll, updateTask, updateUser, getAllUsers, createNewUser, getUserFromName };
+export { fetchAll, updateTask, deleteTask, updateUser, getAllUsers, createNewUser, getUserFromName };
