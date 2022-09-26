@@ -38,7 +38,7 @@ async function updateTask(dbId, body) {
     const baseUrl = "http://localhost:4001/dashboard/tasks/";
     const res = await fetch(`${baseUrl}${dbId}`, options);
     const data = await res.json();
-    console.log(data);
+    return data;
   } catch (error) {
     console.log(error);
   }
@@ -81,4 +81,15 @@ const getAllUsers = async (url, setState) => {
   }
 };
 
-export { fetchAll, updateTask, updateUser, getAllUsers, createNewUser };
+
+const getUserFromName = async (urlPath, data) => {
+  try {
+    const res = await fetch(`${urlPath}/${data.firstName}/${data.lastName}`);
+    const newObj = await res.json();
+    return newObj;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export { fetchAll, updateTask, updateUser, getAllUsers, createNewUser, getUserFromName };

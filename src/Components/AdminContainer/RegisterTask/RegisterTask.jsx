@@ -21,7 +21,6 @@ const RegisterTask = () => {
   const [task, setTask] = useState({});
 
   const handleChange = (e) => {
-    // console.log(e.target)
     const { name, value } = e.target;
     setTask((prev) => {
       return {
@@ -31,7 +30,6 @@ const RegisterTask = () => {
     });
   };
 
-  console.log(task);
 
   const createTask = (e) => {
     // e.preventDefault()

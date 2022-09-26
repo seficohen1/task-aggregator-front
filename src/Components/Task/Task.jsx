@@ -11,8 +11,7 @@ const Task = (props) => {
   const dueDate = dates.getLongDate(props.dueDate);
 
   const deleteTask = (id) => {
-    // console.log(id)
-
+    
     axios
       .delete(`http://localhost:4001/dashboard/tasks/${id}`)
       .then((res) => console.log(res))
@@ -29,7 +28,7 @@ const Task = (props) => {
         </Grid>
         <Grid className="task__grid" xs={2}>
           <span className="task__username">
-            {/* {user.firstName} {user.lastName} */}
+            {user.firstName} {user.lastName}
           </span>
         </Grid>
         <Grid className="task__grid" xs={2}>

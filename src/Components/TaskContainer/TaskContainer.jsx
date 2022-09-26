@@ -20,7 +20,6 @@ const TaskContainer = (props) => {
       <TaskBar />
       <section className="container__taskcontainer">
         {docs && docs.map((doc) => (
-          
           <Task
             key={uniqid()}
             dbId={doc._id}
