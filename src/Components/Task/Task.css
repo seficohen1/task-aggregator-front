@@ -7,15 +7,16 @@
   display: flex;
   align-items: center;
   height: 5rem;
-  margin: .5rem 0 0 0;
+  margin: .6rem 0 0 0;
   padding: 0;
-  border-left: 5px solid var(--fifth-color);
+  border: 1px solid #dadada;
+  border-left: 7px solid #9e8cf8;
   border-radius: .4rem;
-  background-color: rgba(255, 255, 255, 0.353);
+  background-color: #fff;
 }
 
 .container__grid:hover {
-  background-color: rgba(255, 255, 255, 0.637);
+  background-color: #f8f8f8;
 }
 
 .dropdown__icon {
@@ -62,8 +63,9 @@
   width: 7rem;
   background-color: rgba(161, 219, 255, 0.163);
   border-radius: .4rem;
-  border: 2px solid rgb(205, 220, 238);
+  border: none;
 }
+
 
 .task__select--option:nth-child(2) {
 background-color: #ADDA89;

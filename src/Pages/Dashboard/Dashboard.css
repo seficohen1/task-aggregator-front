@@ -3,13 +3,29 @@ height: 100vh;
 }
 .taskmenu__container {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-content: center;
   align-content: flex-end;
   height: 3rem;
   margin-bottom: 1rem;
   border-radius: .4rem;
   background-color: #AAC4FF;
   font-family: var(--project-font);
+}
+
+.taskmenu__article {
+  display: flex;
+}
+
+.taskmenu__office--btn {
+  background-color: var(--contrast-color);
+  color: var(--fifth-color);
+  font-size: .9rem;
+  cursor: default;
+}
+
+.taskmenu__office--btn:hover {
+  background-color:rgb(247, 229, 149);
 }
 
 .taskmenu__btn {
