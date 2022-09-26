@@ -2,17 +2,21 @@ import "./TaskDetail.css";
 import { useState } from 'react'
 import { useLocation } from "react-router-dom";
 import { Button, Input, Grid, Textarea } from "@nextui-org/react";
+import Swal from 'sweetalert2'
 import { useForm } from "react-hook-form";
 import { updateTask } from "../../api/api";
 import TaskStatusSelect from "../../Components/TaskStatusSelect/TaskStatusSelect";
 import { dates } from '../../utils/index'
 import { dataHelpers } from '../../utils/data'
+import { alerts } from "../../utils/index";
+
 
 export default function TaskDetail() {
+  
   const location = useLocation() || null;
   const { user, description, dbId, status, title, dueDate } = location.state;    
   const formattedDate = dates.getFormattedDate(dueDate)  
-
+console.log(location.state)
   const [newUser, setNewUser] = useState([]);
   
   const createUpdatedTask = (data, newUser) => {
@@ -117,7 +121,8 @@ export default function TaskDetail() {
             <TaskStatusSelect dbId={dbId} status={status} user={user} />
           </article>
           <article className="task__article">
-          <Button className="task__btn" type="submit">Edit Task</Button>
+            <Button className="task__btn" type="button" onPress={() => navigate(-1)}>Back</Button>
+            <Button className="task__btn" type="submit">Save</Button>
           </article>
           <article className="task__article errors">
             {errors.taskTitle && <div>{errors.taskTitle.message}</div>}

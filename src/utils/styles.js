@@ -31,6 +31,7 @@ const setStatusDropdownColors = (statusState) => {
 }
 
 const styles = {
+  dropdownColors,
   setStatusDropdownColors,
 }
 
