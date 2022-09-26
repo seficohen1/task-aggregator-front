@@ -48,29 +48,38 @@ const UpdateUserForm = ({
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <Grid.Container>
+        <Grid.Container justify="center">
           <Grid className="update-from-field">
             <Input
-              label="First Name"
+              label="First name"
               name="firstName"
               onChange={handleChange}
               placeholder={firstName}
+              css={{
+                width: "100%",
+              }}
             />
           </Grid>
           <Grid className="update-from-field">
             <Input
-              label="Last Name"
+              label="Last name"
               name="lastName"
               onChange={handleChange}
               placeholder={lastName}
+              css={{
+                width: "100%",
+              }}
             />
           </Grid>
           <Grid className="update-from-field">
             <Input
-              label="email"
+              label="Email"
               name="email"
               onChange={handleChange}
               placeholder={email}
+              css={{
+                width: "100%",
+              }}
             />
           </Grid>
           {user.role === "admin" && (
@@ -101,6 +110,12 @@ const UpdateUserForm = ({
             className="update-from-field"
             type="submit"
             value={`I'm done`}
+            css={{
+              width: "100%",
+              backgroundColor: "#25316D",
+              fontSize: "1.2rem",
+              marginTop: "1.5rem",
+            }}
           >
             I'm Done
           </Button>
