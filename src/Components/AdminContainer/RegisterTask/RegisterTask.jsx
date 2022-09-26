@@ -22,7 +22,7 @@ const RegisterTask = () => {
 		getTasks();
 	}, []);
 
-	console.log(tasks);
+	// console.log(tasks);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
