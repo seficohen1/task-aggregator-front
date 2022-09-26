@@ -5,24 +5,22 @@ import axios from "axios";
 import TaskStatusSelect from "../TaskStatusSelect/TaskStatusSelect";
 import { dates } from "../../utils/index";
 
-
 const Task = (props) => {
   const { dbId, user, title, status } = props;
   // format date for dashboard, using func from utils
   const dueDate = dates.getLongDate(props.dueDate);
 
-
   const deleteTask = (id) => {
     // console.log(id)
 
     axios
-    .delete(`http://localhost:4001/dashboard/tasks/${id}`)
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
+      .delete(`http://localhost:4001/dashboard/tasks/${id}`)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
 
-    window.location.reload()
-  }
-  
+    window.location.reload();
+  };
+
   return (
     <main className="container__task">
       <Grid.Container className="container__grid" gap={2} justify="center">
@@ -41,7 +39,7 @@ const Task = (props) => {
         <Grid className="task__grid" xs={3}>
           {dueDate}
           <Dropdown className="task__dropdown">
-            <Dropdown.Button color="secondary" light>
+            <Dropdown.Button className="edit_emp" color="secondary" light>
               <i className="dropdown__icon bx bx-dots-horizontal-rounded"></i>
             </Dropdown.Button>
             <Dropdown.Menu
@@ -54,9 +52,8 @@ const Task = (props) => {
                   Edit
                 </Link>
               </Dropdown.Item>
-              <Dropdown.Item key="delete" color="error" >
+              <Dropdown.Item key="delete" color="error">
                 <Button onClick={() => deleteTask(dbId)}>Delete</Button>
-                
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>

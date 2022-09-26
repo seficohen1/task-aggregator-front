@@ -1,18 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
+import { getAllUsers } from "../../api/api";
 import "./UserDetail.css";
 
 import UserBar from "../../Components/UserBar/UserBar";
 import Employee from "../../Components/Employee/Employee";
+import { EmployeeContext } from "../../context/EmployeeContex";
 
 function UserDetail() {
-  const [employees, setEmployees] = useState([]);
-
-  useEffect(() => {
-    axios.get("http://localhost:4001/dashboard/users").then((data) => {
-      setEmployees(data.data.results);
-    });
-  }, []);
+  const { employees } = useContext(EmployeeContext);
 
   return (
     <>

@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     axios
       .get("http://localhost:4001/dashboard/users")
-      .then((data) => setUser(data.data.results[5]));
+      .then((data) => setUser(data.data.results[3]));
   }, []);
 
   return (

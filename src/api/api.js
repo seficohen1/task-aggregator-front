@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const createNewUser = async (newUser) => {
   axios
@@ -7,11 +8,7 @@ const createNewUser = async (newUser) => {
     .catch((err) => console.log(err));
 };
 
-
-
-
-
-async function fetchTasks (setState) {
+async function fetchTasks(setState) {
   try {
     const res = await fetch("http://localhost:4001/dashboard/tasks");
     const data = await res.json();
@@ -22,8 +19,7 @@ async function fetchTasks (setState) {
   }
 }
 
-
-async function updateTask (dbId, body) {
+async function updateTask(dbId, body) {
   const options = {
     method: "PATCH",
     mode: "cors",
@@ -42,4 +38,41 @@ async function updateTask (dbId, body) {
   }
 }
 
-export { fetchTasks, updateTask, createNewUser };
+// edit user  details
+
+const updateUser = async (url, options) => {
+  const { firstName, lastName, email, role, dropDownInput } = options;
+
+  try {
+    const request = await axios.patch(url, {
+      firstName,
+      lastName,
+      email,
+      role: role === "undefined" ? "user" : dropDownInput,
+    });
+    if (request.status === 200) {
+      Swal.fire({
+        icon: "success",
+        text: "User was saved successfully",
+      });
+    } else {
+      Swal.fire({
+        icon: "warning",
+        text: "Oops, something went wrong!",
+      });
+    }
+  } catch (error) {
+    throw Error(error);
+  }
+};
+
+const getAllUsers = async (url, setState) => {
+  try {
+    const request = await axios(url);
+    if (request.status === 200) setState(request.data.results);
+  } catch (error) {
+    throw Error(error);
+  }
+};
+
+export { fetchTasks, updateTask, updateUser, getAllUsers, createNewUser };
