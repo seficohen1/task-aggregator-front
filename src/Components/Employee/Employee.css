@@ -13,6 +13,9 @@
   border-radius: .4rem;
   background-color: rgba(255, 255, 255, 0.353);
 }
+.container__gird--employee:hover {
+  background-color: rgba(255, 255, 255, 0.637);
+}
 
 .emp__grid:nth-child(1) {
   padding-left: 2.4rem;
@@ -34,8 +37,15 @@
   padding: 1.5rem 0 0 0;
   font-size: 1.1rem;
   font-weight: 200;
-}
+} 
 .emp-edit-modal-btn {
   all: unset;
   cursor: pointer;
+}
+
+.emp__role {
+  align-self: center;
+}
+.edit_emp{
+ padding: 1rem;
 }

@@ -37,7 +37,6 @@ const RegisterTask = () => {
       });
     };
 
-  console.log(task);
 
   const createTask = (e) => {
     e.preventDefault();

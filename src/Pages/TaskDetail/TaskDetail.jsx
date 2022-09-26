@@ -1,40 +1,52 @@
 import "./TaskDetail.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from 'react'
+import { useLocation } from "react-router-dom";
 import { Button, Input, Grid, Textarea } from "@nextui-org/react";
 import Swal from 'sweetalert2'
 import { useForm } from "react-hook-form";
 import { updateTask } from "../../api/api";
 import TaskStatusSelect from "../../Components/TaskStatusSelect/TaskStatusSelect";
 import { dates } from '../../utils/index'
+import { dataHelpers } from '../../utils/index'
 import { alerts } from "../../utils/index";
+import { getUserFromName } from "../../api/api";
 
 
 export default function TaskDetail() {
   
   const location = useLocation() || null;
-  const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors } } = useForm();
   const { user, description, dbId, status, title, dueDate } = location.state;    
   const formattedDate = dates.getFormattedDate(dueDate)  
 
-  const onSubmit = (data) => {
-    const updatedTask = {
-      title: data.taskTitle,
-      description: data.description,
-      status: data.status,
-      dueDate: data.dueDate,
-    }
-    Swal.fire(alerts.updatedTaskConfirmAlert).then(result => {
-      if (result.isConfirmed) {
-        updateTask(dbId, updatedTask);
-        Swal.fire(alerts.updatedTaskSuccess);
-        setTimeout(() => {
-          navigate(-1)
-        }, 2000);
+  
+  const { 
+    register, 
+    handleSubmit, 
+    formState: { errors } } = useForm( {defaultValues: {
+      title: title,
+      description: description,
+      status: status,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      dueDate: formattedDate,
+  }});
+
+
+  const onSubmit = async (data) => {
+    if (dataHelpers.isChangedUser(data, user)) {
+      const urlPath = `http://localhost:4001/dashboard/users`;
+      const newUser = await getUserFromName(urlPath, data);
+      console.log(newUser)
+      if (newUser.userByName.length === 0) {
+        Swal.fire(alerts.warningCreateUser);
+        return;
       }
-    })
-    
+      const task = dataHelpers.createUpdatedTask(data, newUser);
+      updateTask(dbId, task)
+      Swal.fire(alerts.updatedTaskSuccess);
+    }
   }
+
 
 
   return (
@@ -48,8 +60,7 @@ export default function TaskDetail() {
               label="Task:"
               type="text"
               placeholder="Task Title"
-              value={title && title}
-              {...register("taskTitle", {
+              {...register("title", {
                 required: 'Task name is required'
               }) }
             />
@@ -60,16 +71,20 @@ export default function TaskDetail() {
               label="First Name"
               type="text"
               placeholder="First Name"
-              value={user.firstName && user.firstName}
-              readOnly
+              {...register("firstName", {
+                required: 'First name is required'
+              }) }  
+              // readOnly
             />
             <Input
               className="task__input"
               label="Last Name"
               type="text"
               placeholder="Last Name"
-              value={user.lastName && user.lastName}
-              readOnly           
+              {...register("lastName", {
+                required: 'Last name is required'
+              }) }  
+              // readOnly           
             />
           </article>
           <article className="task__article">
@@ -78,7 +93,6 @@ export default function TaskDetail() {
               label="Description:"
               type="text"
               placeholder="Task Description"
-              value={description && description}
               {...register("description", {
                 required: 'Task description is required'
               }) }              
@@ -90,7 +104,6 @@ export default function TaskDetail() {
               label="Due Date"
               type="date"
               placeholder={Date()}
-              value={formattedDate && formattedDate}
               min={Date()}
               max="2022-12-31"
               {...register("dueDate", {

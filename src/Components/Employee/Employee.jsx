@@ -18,42 +18,44 @@ const Employee = ({ firstName, lastName, email, role, id }) => {
   const [visible, setVisible] = useState(false);
   const handler = () => setVisible(true);
   const closeHandle = () => setVisible(false);
+  const editOption = user?.role === "admin" || user._id === id;
 
   return (
     <main className="container__employee">
       <Grid.Container
         className="container__gird--employee"
         gap={2}
-        justify="space-between  "
+        justify="center"
       >
-        <Grid className="emp__grid" xs={1}>
+        <Grid className="emp__grid" xs={5}>
           {firstName}
         </Grid>
-        <Grid xs={1}>{lastName}</Grid>
-        <Grid xs={1}>{email}</Grid>
-        <Grid xs={1}>{role}</Grid>
+        <Grid xs={2}>{lastName}</Grid>
+        <Grid xs={2}>{email}</Grid>
+        <Grid xs={3} justify="space-between">
+          <p className="emp__role">{role}</p>
 
-        {(user?.role === "admin" || user._id === id) && (
-          <Grid xs={1}>
-            <Button
-              className="emp-edit-modal-btn"
-              onPress={handler}
-              onClose={closeHandle}
-            >
-              {<Grid></Grid>}
-              <i className="dropdown__icon bx bx-dots-horizontal-rounded"></i>
-            </Button>
-            <UserModal
-              visible={visible}
-              closeHandler={closeHandle}
-              firstName={firstName}
-              lastName={lastName}
-              email={email}
-              role={role}
-              id={id}
-            />
-          </Grid>
-        )}
+          {(user?.role === "admin" || user._id === id) && (
+            <>
+              <Button
+                className="emp-edit-modal-btn"
+                onPress={handler}
+                onClose={closeHandle}
+              >
+                <i className="dropdown__icon bx bx-dots-horizontal-rounded edit_emp"></i>
+              </Button>
+              <UserModal
+                visible={visible}
+                closeHandler={closeHandle}
+                firstName={firstName}
+                lastName={lastName}
+                email={email}
+                role={role}
+                id={id}
+              />
+            </>
+          )}
+        </Grid>
       </Grid.Container>
     </main>
   );

@@ -24,14 +24,18 @@ const DashboardUser = () => {
                 <Button
                   size="sm"
                   onClick={() => setIsTaskSelected(true)}
-                  className="taskmenu__btn"
+                  className={
+                    !isTaskSelected ? "taskmenu__btn" : "taskmenu__btn selected"
+                  }
                 >
                   Task
                 </Button>
                 <Button
                   size="sm"
                   onClick={() => setIsTaskSelected(false)}
-                  className="taskmenu__btn"
+                  className={
+                    isTaskSelected ? "taskmenu__btn" : "taskmenu__btn selected"
+                  }
                 >
                   Employees
                 </Button>
