@@ -14,7 +14,7 @@ const Login = () => {
 						<Input className='input__form--pass' label='Password' type='text' name='password' id='password' />
 						<Link className='link__form' to='dashboard'>
 							<Button className='btn__form'>
-								SIGN UP
+								SIGN IN
 							</Button>
 						</Link>
 					</form>
