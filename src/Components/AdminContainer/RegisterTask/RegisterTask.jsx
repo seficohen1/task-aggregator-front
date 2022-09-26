@@ -1,42 +1,57 @@
 import React from 'react';
 import { Button, Container, Input } from '@nextui-org/react';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import uniqid from 'uniqid';
 import './RegisterTask.css'
 
 const RegisterTask = () => {
-	const [title, setTitle] = useState('');
-	const [description, setDescription] = useState('');
-	const [user, setUser] = useState('');
-	const [date, setDate] = useState('');
+	// const [title, setTitle] = useState('');
+	// const [description, setDescription] = useState('');
+	// const [user, setUser] = useState('');
+	// const [date, setDate] = useState('');
 
-	const [tasks, setTasks] = useState([]);
+	// const [tasks, setTasks] = useState([]);
 
-	const url = 'http://localhost:4001/dashboard/tasks';
-	const getTasks = async () => {
-		const response = await fetch(url);
-		const data = await response.json();
-		setTasks(data.results);
-	};
-	useEffect(() => {
-		getTasks();
-	}, []);
 
-	console.log(tasks);
+	const navigate = useNavigate()	
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		if (title && description) {
-			const taskInfo = { id: uniqid(), title, description, user, date };
-			setTasks([...tasks, taskInfo]);
-			setTitle('');
-			setDescription('');
-		}
-	};
+
+	const [task, setTask] = useState ({
+		
+	})
+
+	
+
+	const handleChange = (e) => {
+		// console.log(e.target)		
+		const {name, value} = e.target
+		setTask(prev=>{
+			return{
+			 ...prev,
+			 [name]: value,
+			}
+		})
+	}
+
+	console.log(task)
+
+	const createTask = (e) => {		 
+		// e.preventDefault()
+		console.log("Add task!")
+
+		axios
+		.post("http://localhost:4001/dashboard/tasks", task)
+		.then(res=>console.log(res))
+		.catch(err=>console.log(err))
+
+		navigate('/dashboard')
+	}
 
 	return (
 		<main className='registertask__container'>
-			<form className='registertask__form' onSubmit={handleSubmit}>
+			<form className='registertask__form'>
 					<h2 className='task__title'>NEW TASK</h2>
 					<Input
           className='registertask__input'
@@ -44,8 +59,8 @@ const RegisterTask = () => {
 						type='text'
 						id='title'
 						name='title'
-						value={title}
-						onChange={(e) => setTitle(e.target.value)}
+						value={task.title}						
+						onChange={handleChange}
 					/>
 					<Input
           className='registertask__input'
@@ -53,30 +68,31 @@ const RegisterTask = () => {
 						type='text'
 						id='description'
 						name='description'
-						value={description}
-						onChange={(e) => setDescription(e.target.value)}
+						value={task.description}
+						onChange={handleChange}
 					/>
-					<Input
+					{/* <Input
           className='registertask__input'
 						label='User'
 						type='text'
-						id='description'
-						name='description'
-						value={user}
-						onChange={(e) => setUser(e.target.value)}
-					/>
-					<Input
+						id='user'
+						name='user'
+						value={task.user}
+						onChange={handleChange}
+					/> */}
+					{/* <Input
           className='registertask__input'
 						label='Date'
 						type='date'
-						id='description'
-						name='description'
-						value={date}
-						onChange={(e) => setDate(e.target.value)}
-					/>
-				<Button className='registertask__btn' type='submit'>Add Task</Button>
+						id='date'
+						name='date'
+						value={task.date}
+						onChange={handleChange}
+					/> */}
+				<Button className='registertask__btn' type='submit' onClick={createTask}>Add Task</Button>
 			</form>
 		</main>
+
 	);
 };
 
