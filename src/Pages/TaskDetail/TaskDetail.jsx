@@ -16,7 +16,8 @@ export default function TaskDetail() {
   
   const location = useLocation() || null;
   const { user, description, dbId, status, title, dueDate } = location.state;    
-  const formattedDate = dates.getFormattedDate(dueDate)  
+  const formattedDate = dates.getFormattedDate(dueDate) ;
+  const minDate = dates.getFormattedDate(new Date(Date.now())) 
 
   
   const { 
@@ -28,11 +29,12 @@ export default function TaskDetail() {
       status: status,
       firstName: user.firstName,
       lastName: user.lastName,
-      dueDate: formattedDate,
+      dueDate: minDate,
   }});
 
 
   const onSubmit = async (data) => {
+    console.log(data)
     if (dataHelpers.isChangedUser(data, user)) {
       const urlPath = `http://localhost:4001/dashboard/users`;
       const newUser = await getUserFromName(urlPath, data);
@@ -103,9 +105,8 @@ export default function TaskDetail() {
               className="task__input"
               label="Due Date"
               type="date"
-              placeholder={Date()}
-              min={Date()}
-              max="2022-12-31"
+              placeholder={minDate}
+              min={minDate}
               {...register("dueDate", {
                 required: 'Due date is required', 
                 valueAsDate: true,
