@@ -31,7 +31,7 @@ const Task = (props) => {
         </Grid>
         <Grid className="task__grid" xs={2}>
           <span className="task__username">
-            {/* {user.firstName} {user.lastName} */}
+            {user.firstName} {user.lastName}
           </span>
         </Grid>
         <Grid className="task__grid" xs={2}>
