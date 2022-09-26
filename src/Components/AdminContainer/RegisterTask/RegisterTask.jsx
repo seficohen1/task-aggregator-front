@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Container, Input } from "@nextui-org/react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+// import { useForm } from "react-hook-form";
 import axios from "axios";
 import uniqid from "uniqid";
 import "./RegisterTask.css";
@@ -15,6 +16,7 @@ const RegisterTask = () => {
   // const [tasks, setTasks] = useState([]);
 
   const navigate = useNavigate();
+//   const { register, handleSubmit, getValues, watch, formState: { errors } } = useForm();
 
   const [task, setTask] = useState({});
 
@@ -41,6 +43,7 @@ const RegisterTask = () => {
       .catch((err) => console.log(err));
 
     navigate("/dashboard");
+	window.location.reload()
   };
 
   return (

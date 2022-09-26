@@ -10,11 +10,11 @@ const RouterPath = () => {
   return (
     <Routes>
       <Route index element={<Login />} />
-      <Route path="dashboard" element={<Dashboard />}>
-        <Route path="admin" element={<Admin />} />
-        <Route path="task" element={<TaskDetail />} />
-        <Route path="dashboard/:userId" element={<UserDetail />} />
-      </Route>
+      <Route path="/dashboard" element={<Dashboard />}/>
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/task" element={<TaskDetail />} />
+        {/* <Route path="dashboard/:userId" element={<UserDetail />} /> */}
+      
     </Routes>
   );
 };
