@@ -1,15 +1,17 @@
 import { set } from "react-hook-form";
 
 
-
-
-
-async function fetchTasks (setState) {
+async function fetchAll (urlPath, setState) {
   try {
-    const res = await fetch('http://localhost:4001/dashboard/tasks')
+    const res = await fetch(`http://localhost:4001/dashboard/${urlPath}`)
     const data = await res.json();
-    const results = data.results;
-    setState(results);
+    let results;
+    if (data.results) {
+      results = data.results
+      setState(results);
+    } else {
+      setState(data)
+    }
   } catch (error) {
     console.error(error)
   }
@@ -36,4 +38,7 @@ async function updateTask (dbId, body) {
   }
 }
 
-export { fetchTasks, updateTask }
+
+
+
+export { fetchAll, updateTask }

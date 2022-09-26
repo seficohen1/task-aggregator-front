@@ -1,28 +1,46 @@
 import "./TaskDetail.css";
+import { useState } from 'react'
 import { useLocation } from "react-router-dom";
 import { Button, Input, Grid, Textarea } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import { updateTask } from "../../api/api";
 import TaskStatusSelect from "../../Components/TaskStatusSelect/TaskStatusSelect";
 import { dates } from '../../utils/index'
+import { dataHelpers } from '../../helpers/data'
 
 export default function TaskDetail() {
   const location = useLocation() || null;
-  const { register, handleSubmit, formState: { errors } } = useForm();
   const { user, description, dbId, status, title, dueDate } = location.state;    
   const formattedDate = dates.getFormattedDate(dueDate)  
 
+  const { register, handleSubmit, getValues, watch, formState: { errors } } = useForm();
+  const [existingUser, setExistingUser] = useState([]);
+  const [updatedTask, setUpdatedTask] = useState({})
+  const [data, setData] = useState();
+  
+  
+const createUpdatedTask = (data) => {
+  let updatedTask = {
+    title: data.taskTitle,
+    description: data.description,
+    status: data.status,
+    dueDate: data.dueDate,    
+  }
+
+  if (dataHelpers.checkForUser(data, user, setExistingUser) === true) {
+    console.log(existingUser)
+    const updatedUserId = { _id: existingUser.userByName[0]._id };
+    updatedTask.user = updatedUserId;
+  }
+  return updatedTask;
+}
+
   const onSubmit = (data) => {
-    const updatedTask = {
-      title: data.taskTitle,
-      description: data.description,
-      status: data.status,
-      dueDate: data.dueDate,
-    }
-    updateTask(dbId, updatedTask)
+    const task = createUpdatedTask(data)
+    updateTask(dbId, task)
   }
    
-    
+  
   return (
     <>
       <Grid.Container className="task__container">
@@ -47,7 +65,10 @@ export default function TaskDetail() {
               type="text"
               placeholder="First Name"
               value={user.firstName && user.firstName}
-              readOnly
+              {...register("firstName", {
+                required: 'First name is required'
+              }) }  
+              // readOnly
             />
             <Input
               className="task__input"
@@ -55,7 +76,10 @@ export default function TaskDetail() {
               type="text"
               placeholder="Last Name"
               value={user.lastName && user.lastName}
-              readOnly           
+              {...register("lastName", {
+                required: 'Last name is required'
+              }) }  
+              // readOnly           
             />
           </article>
           <article className="task__article">
