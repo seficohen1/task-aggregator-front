@@ -10,6 +10,7 @@ const Task = (props) => {
   const { dbId, user, title, status } = props;
   // format date for dashboard, using func from utils
   // console.log("user", user.firstName)
+  const navigate = useNavigate();
   const dueDate = dates.getLongDate(props.dueDate);
 
   
@@ -41,9 +42,12 @@ const Task = (props) => {
               aria-label="Actions"
             >
               <Dropdown.Item key="edit" textValue="edit task">
-                <Link to='/task' state={props}>
-                  Edit
-                </Link>
+                <Button onClick={() => {
+                  navigate('/task', { state: props})
+                // to='/task' state={props}>
+                }}>
+                Edit
+                </Button>
               </Dropdown.Item>
               <Dropdown.Item key="delete" color="error">
                 <Button onClick={() => {
