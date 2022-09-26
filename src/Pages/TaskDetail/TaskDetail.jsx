@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { updateTask } from "../../api/api";
 import TaskStatusSelect from "../../Components/TaskStatusSelect/TaskStatusSelect";
 import { dates } from '../../utils/index'
-import { dataHelpers } from '../../helpers/data'
+import { dataHelpers } from '../../utils/data'
 
 export default function TaskDetail() {
   const location = useLocation() || null;
