@@ -39,9 +39,6 @@ const RegisterTask = () => {
 
   const createTask = async (e) => {
     // e.preventDefault();
-    console.log("Add task!");
-    console.log("task state", task);
-
     const urlPath = "http://localhost:4001/dashboard/users";
     const user = await getUserFromName(urlPath, task);
     console.log(user);
@@ -51,14 +48,10 @@ const RegisterTask = () => {
     } 
 
 	const taskPost = dataHelpers.createUpdatedTask(task, user) 
-	console.log("taskPost", taskPost)
-
-	createNewTask(task)   
-	Swal.fire(alerts.updatedTaskSuccess)
-
-    navigate("/dashboard");
-    window.location.reload();
-  };
+	Swal.fire(alerts.taskCreated);
+  createNewTask(task)   
+	
+};
 
   return (
     <main className="registertask__container">

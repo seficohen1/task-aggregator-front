@@ -57,6 +57,7 @@ const Task = (props) => {
                       Swal.fire(alerts.taskDeleted)
                     }
                   })
+                  setTimeout(() => { window.location.reload()}, 2000);
             }}>Delete</Button>
               </Dropdown.Item>
             </Dropdown.Menu>
