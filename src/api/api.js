@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 import axios from "axios";
 import Swal from "sweetalert2";
-=======
->>>>>>> task-detail
 
 const createNewUser = async (newUser) => {
   axios
@@ -11,16 +8,10 @@ const createNewUser = async (newUser) => {
     .catch((err) => console.log(err));
 };
 
-<<<<<<< HEAD
-async function fetchTasks(setState) {
-  try {
-    const res = await fetch("http://localhost:4001/dashboard/tasks");
-=======
 
 async function fetchAll (urlPath, setState) {
   try {
     const res = await fetch(`http://localhost:4001/dashboard/${urlPath}`)
->>>>>>> task-detail
     const data = await res.json();
     let results;
     if (data.results) {
@@ -53,7 +44,6 @@ async function updateTask(dbId, body) {
   }
 }
 
-<<<<<<< HEAD
 // edit user  details
 
 const updateUser = async (url, options) => {
@@ -91,10 +81,4 @@ const getAllUsers = async (url, setState) => {
   }
 };
 
-export { fetchTasks, updateTask, updateUser, getAllUsers, createNewUser };
-=======
-
-
-
-export { fetchAll, updateTask }
->>>>>>> task-detail
+export { fetchAll, updateTask, updateUser, getAllUsers, createNewUser };
