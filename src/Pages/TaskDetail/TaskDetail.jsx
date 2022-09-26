@@ -1,5 +1,5 @@
 import "./TaskDetail.css";
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useLocation } from "react-router-dom";
 import { Button, Input, Grid, Textarea } from "@nextui-org/react";
 import Swal from 'sweetalert2'
@@ -9,9 +9,11 @@ import TaskStatusSelect from "../../Components/TaskStatusSelect/TaskStatusSelect
 import { dates } from '../../utils/index'
 import { dataHelpers } from '../../utils/data'
 import { alerts } from "../../utils/index";
+import AuthContext from "../../context/AuthContext";
 
 
 export default function TaskDetail() {
+  const {token} = useContext(AuthContext)
   
   const location = useLocation() || null;
   const { user, description, dbId, status, title, dueDate } = location.state;    
@@ -50,7 +52,7 @@ console.log(location.state)
       dataHelpers.checkForUserInDb(data, setNewUser)
     }
     const updatedTask = createUpdatedTask(data, newUser)    
-    updateTask(dbId, updatedTask)
+    updateTask(dbId, updatedTask, token.token)
     console.log('Updated user from form has been submitted')
   }
    

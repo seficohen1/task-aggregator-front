@@ -5,15 +5,17 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import TaskDetail from "../Pages/TaskDetail/TaskDetail";
 import UserDetail from "../Pages/UserDetail/UserDetail";
 import Login from "../Pages/Login/Login";
+import ProtectedRoute from "./ProtectedRoute";
+import ProtectedAdmin from "./ProtectedAdmin";
 
 const RouterPath = () => {
   return (
     <Routes>
       
       <Route index element={<Login />} />
-      <Route path="dashboard" element={<Dashboard />} />
-      <Route path="admin" element={<Admin />} />
-      <Route path="task" element={<TaskDetail />} />
+      <Route path="dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+      <Route path="admin" element={<ProtectedAdmin><Admin /></ProtectedAdmin>} />
+      <Route path="task" element={<ProtectedRoute><TaskDetail /></ProtectedRoute>} />
         {/* <Route path="dashboard/:userId" element={<UserDetail />} /> */}
 
     </Routes>

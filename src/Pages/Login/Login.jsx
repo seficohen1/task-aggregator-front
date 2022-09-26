@@ -12,8 +12,6 @@ const Login = () => {
 	const [error, setError] = useState("")
 
 	const navigate = useNavigate()
-
-	console.log(details)
 	
 	const login = () => {
 		if (details.email === '' || details.password === '') {
@@ -30,17 +28,15 @@ const Login = () => {
 
 		userLogin(details, setUser, setToken, setError)
 
-
 		setTimeout(() => {
 			setError('')
 		}, 7000);
-	
-		if (user) {
+		if (user.firstName) {
 			navigate('/dashboard', { replace: true })
-			}
-	}
-		console.log("user: ",user)
+		}
 
+	}
+	
 	return (
 		<main className='container__form'>
 			<Card className='login__card' css={{ w:'30rem' }}>

@@ -1,20 +1,28 @@
+import React, {useContext} from 'React'
 import { Grid, Dropdown, Collapse, Button } from "@nextui-org/react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Task.css";
 import axios from "axios";
 import TaskStatusSelect from "../TaskStatusSelect/TaskStatusSelect";
 import { dates } from "../../utils/index";
+import AuthContext from "../../context/AuthContext";
 
 const Task = (props) => {
   const { dbId, user, title, status } = props;
   // format date for dashboard, using func from utils
   const dueDate = dates.getLongDate(props.dueDate);
 
+  const {token} = useContext(AuthContext)
+
   const deleteTask = (id) => {
-    // console.log(id)
+    console.log(id)
 
     axios
-      .delete(`http://localhost:4001/dashboard/tasks/${id}`)
+      .delete(`http://localhost:4001/dashboard/tasks/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token.token}`
+        }
+      })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
 
