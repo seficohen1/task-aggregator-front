@@ -8,7 +8,7 @@ const Task = (props) => {
   const { dbId, user, title, status } = props;
   // format date for dashboard, using func from utils
   const dueDate = dates.getLongDate(props.dueDate);
-  
+
   return (
     <main className="container__task">
       <Grid.Container className="container__grid" gap={2} justify="center">
@@ -27,7 +27,7 @@ const Task = (props) => {
         <Grid className="task__grid" xs={3}>
           {dueDate}
           <Dropdown className="task__dropdown">
-            <Dropdown.Button color="secondary" light>
+            <Dropdown.Button className="edit_emp" color="secondary" light>
               <i className="dropdown__icon bx bx-dots-horizontal-rounded"></i>
             </Dropdown.Button>
             <Dropdown.Menu
