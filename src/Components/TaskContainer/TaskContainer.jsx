@@ -19,7 +19,7 @@ const TaskContainer = (props) => {
     <>
       <TaskBar />
       <section className="container__taskcontainer">
-        {docs.map((doc) => (
+        {docs && docs.map((doc) => (
           
           <Task
             key={uniqid()}

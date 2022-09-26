@@ -13,31 +13,41 @@ export default function TaskDetail() {
   const { user, description, dbId, status, title, dueDate } = location.state;    
   const formattedDate = dates.getFormattedDate(dueDate)  
 
-  const { register, handleSubmit, getValues, watch, formState: { errors } } = useForm();
-  const [existingUser, setExistingUser] = useState([]);
-  const [updatedTask, setUpdatedTask] = useState({})
-  const [data, setData] = useState();
+  const [newUser, setNewUser] = useState([]);
   
-  
-const createUpdatedTask = (data) => {
-  let updatedTask = {
-    title: data.taskTitle,
-    description: data.description,
-    status: data.status,
-    dueDate: data.dueDate,    
-  }
-
-  if (dataHelpers.checkForUser(data, user, setExistingUser) === true) {
-    console.log(existingUser)
-    const updatedUserId = { _id: existingUser.userByName[0]._id };
-    updatedTask.user = updatedUserId;
-  }
-  return updatedTask;
+  const createUpdatedTask = (data, newUser) => {
+    let updatedTask = {
+      title: data.title,
+      description: data.description,
+      status: data.status,
+      dueDate: data.dueDate,    
+    }
+    const updatedUserId = { _id: newUser.userByName[0]._id } || null;
+    if (updatedUserId) updatedTask.user = updatedUserId;
+    return updatedTask;
 }
 
+
+  const { 
+    register, 
+    handleSubmit, 
+    formState: { errors } } = useForm( {defaultValues: {
+      title: title,
+      description: description,
+      status: status,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      dueDate: formattedDate,
+  }});
+
+
   const onSubmit = (data) => {
-    const task = createUpdatedTask(data)
-    updateTask(dbId, task)
+    if (dataHelpers.isChangedUser(user, data)) {
+      dataHelpers.checkForUserInDb(data, setNewUser)
+    }
+    const updatedTask = createUpdatedTask(data, newUser)    
+    updateTask(dbId, updatedTask)
+    console.log('Updated user from form has been submitted')
   }
    
   
@@ -52,8 +62,7 @@ const createUpdatedTask = (data) => {
               label="Task:"
               type="text"
               placeholder="Task Title"
-              value={title && title}
-              {...register("taskTitle", {
+              {...register("title", {
                 required: 'Task name is required'
               }) }
             />
@@ -64,7 +73,6 @@ const createUpdatedTask = (data) => {
               label="First Name"
               type="text"
               placeholder="First Name"
-              value={user.firstName && user.firstName}
               {...register("firstName", {
                 required: 'First name is required'
               }) }  
@@ -75,7 +83,6 @@ const createUpdatedTask = (data) => {
               label="Last Name"
               type="text"
               placeholder="Last Name"
-              value={user.lastName && user.lastName}
               {...register("lastName", {
                 required: 'Last name is required'
               }) }  
@@ -88,7 +95,6 @@ const createUpdatedTask = (data) => {
               label="Description:"
               type="text"
               placeholder="Task Description"
-              value={description && description}
               {...register("description", {
                 required: 'Task description is required'
               }) }              
@@ -100,7 +106,6 @@ const createUpdatedTask = (data) => {
               label="Due Date"
               type="date"
               placeholder={Date()}
-              value={formattedDate && formattedDate}
               min={Date()}
               max="2022-12-31"
               {...register("dueDate", {
