@@ -14,6 +14,7 @@ const TaskContainer = (props) => {
     fetchTasks(setDocs);
   }, []);
 
+  // console.log(docs)
   return (
     <>
       <TaskBar />
