@@ -1,60 +1,66 @@
-import { Grid, Dropdown, Collapse, Button } from '@nextui-org/react'
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import './Task.css'
-
+import { Grid, Dropdown, Collapse, Button } from "@nextui-org/react";
+import { Link, useNavigate } from "react-router-dom";
+import "./Task.css";
+import axios from "axios";
+import TaskStatusSelect from "../TaskStatusSelect/TaskStatusSelect";
+import { dates } from "../../utils/index";
 
 const Task = (props) => {
-  const { id, title, assigned, status, date } = props;
-  const [color, setColor] = useState()    
-  const navigate = useNavigate();
- 
+  const { dbId, user, title, status } = props;
+  // format date for dashboard, using func from utils
+  const dueDate = dates.getLongDate(props.dueDate);
 
+  const deleteTask = (id) => {
+    // console.log(id)
 
+    axios
+      .delete(`http://localhost:4001/dashboard/tasks/${id}`)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
 
+    window.location.reload();
+  };
 
-  return (    
-      <main className='container__task'>
-        <Grid.Container className='container__grid' gap={2} justify='center'>
-          <Grid className='task__grid' xs={5}>
-            {title}
-          </Grid>
-          <Grid className='task__grid' xs={2}>
-          <span className="task__username">{assigned}</span>
-          </Grid>
-          <Grid className='task__grid' xs={2}>
-            <select className='task__select'>
-              <option className='task__select--option' value="0">Status</option>
-              <option className='task__select--option' value="1">Complete</option>
-              <option className='task__select--option' value="2">Waiting</option>
-              <option className='task__select--option' value="3">In process</option>
-              <option className='task__select--option' value="4">Cancelled</option>
-            </select>
-          </Grid>
-          <Grid className='task__grid' xs={3}>
-            {date}
-            <Dropdown className='task__dropdown'>
-              <Dropdown.Button color='secondary' light>
-              <i className='dropdown__icon bx bx-dots-horizontal-rounded'></i>
-              </Dropdown.Button>
-              <Dropdown.Menu
-                color='secondary'
-                variant='light'
-                aria-label='Actions'
-              >
+  return (
+    <main className="container__task">
+      <Grid.Container className="container__grid" gap={2} justify="center">
+        <Grid className="task__grid" xs={5}>
+          {title}
+        </Grid>
+        <Grid className="task__grid" xs={2}>
+          <span className="task__username">
+            {/* {user.firstName} {user.lastName} */}
+          </span>
+        </Grid>
+        <Grid className="task__grid" xs={2}>
+          {/* set value to selected to match values with state option */}
+          <TaskStatusSelect dbId={dbId} status={status} user={user} />
+        </Grid>
+        <Grid className="task__grid" xs={3}>
+          {dueDate}
+          <Dropdown className="task__dropdown">
+            <Dropdown.Button className="edit_emp" color="secondary" light>
+              <i className="dropdown__icon bx bx-dots-horizontal-rounded"></i>
+            </Dropdown.Button>
+            <Dropdown.Menu
+              color="secondary"
+              variant="light"
+              aria-label="Actions"
+            >
+              <Dropdown.Item key="edit" textValue="edit task">
+                <Link to="/task" state={props}>
+                  Edit
+                </Link>
+              </Dropdown.Item>
+              <Dropdown.Item key="delete" color="error">
+                <Button onClick={() => deleteTask(dbId)}>Delete</Button>
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </Grid>
+      </Grid.Container>
+    </main>
+  );
+};
 
-
-
-                <Dropdown.Item key='edit' textValue='edit task'>
-                  <Link to='/dashboard/task' state={ props }>Edit</Link>
-                </Dropdown.Item>
-                <Dropdown.Item key='delete' color='error'>Delete</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </Grid>
-        </Grid.Container>
-      </main>
-  )
-}
-
-export default Task
+export default Task;

@@ -1,0 +1,82 @@
+
+.task__container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 40rem;
+  font-family: var(--project-font);
+  height: 110vh;
+  margin-top: -4rem;
+}
+
+.task__title {
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: .2rem;
+}
+
+.task__form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.task__article {
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  
+}
+
+.errors {
+  margin: 2rem  0 0 0;
+  color: blue;
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-start; */
+  gap: 1rem;
+  
+}
+
+
+
+.task__select {
+  margin: 0.5rem 0 0 2rem;
+  padding: 0 1rem;
+  height: 2.5rem;
+  width: 10rem;
+}
+
+.task__btn {
+  color: var(--fifth-color);
+  font-family: var(--project-font);
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: none;
+  letter-spacing: .25rem;
+  background-color: var(--contrast-color);
+  margin: 2rem 2rem 0 0;
+}
+
+.task__input {
+  width: 18rem;
+  margin: 0 0 1rem; 
+}
+
+.task__input:nth-child(2) { 
+  margin-left: 1.25rem;
+}
+
+label {
+  margin-left: 1.25rem;
+}
+
+.wide {
+  width: 37.5rem;
+}

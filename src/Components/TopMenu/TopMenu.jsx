@@ -1,9 +1,18 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Navbar, Button } from '@nextui-org/react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import './TopMenu.css'
+import AuthContext from '../../context/AuthContext';
 
 const TopMenu = () => {
+	const { setUser, setToken } = useContext(AuthContext)
+	const navigate = useNavigate()
+	const logout = () => {
+		navigate('/', { replace: true })
+		setToken([])
+		setUser([])
+	}
+	
 	return (
 		<>
 		<Navbar className='container__navbar'>
@@ -12,7 +21,7 @@ const TopMenu = () => {
 			</Navbar.Brand>
 			<Navbar.Content>
 				<Navbar.Item>
-					<Link className='link__navbar' to='/'><Button size='sm' className='btn__navbar'>Logout</Button></Link>
+					<Button size='sm' className='btn__navbar' onClick={logout}>Logout</Button>
 				</Navbar.Item>
 			</Navbar.Content>
 		</Navbar>

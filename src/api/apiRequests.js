@@ -7,23 +7,27 @@ const userURL = "http://localhost:4001/dashboard/users/";
 
 //--------------------------------------------
 
-export const userLogin = async (user, setError) => {
+export const userLogin = async (user, setUser, setToken, setError) => {
   await axios({
     method: "post",
     url: loginURL,
     data: user,
   })
     .then((res) => {
-      const userData = {
-        token: res.data.token,
-        firstName: res.data.authenticatedUser.firstName,
-        role: res.data.authenticatedUser.role,
-      };
-      localStorage.setItem("token", JSON.stringify(userData));
-      return userData;
+      if (res.status === 200) {
+        const { role, firstName, _id } = res.data.authenticatedUser;
+        const { token } = res.data;
+        setUser({ firstName, _id, role });
+        setToken({ token });
+        setError("");
+      }
+      if (res.status !== 200) {
+        setError("Wrong email or password");
+      }
     })
-    .catch(() => {
-      setError("Wrong email or password");
+    .catch((e) => {
+      setError(e.message);
+      console.log(e);
     });
 };
 

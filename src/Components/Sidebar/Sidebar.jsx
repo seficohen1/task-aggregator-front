@@ -1,22 +1,26 @@
+
+import React from 'react'
+import { Link, Outlet } from 'react-router-dom'
+import './Sidebar.css'
 import { Container } from "@nextui-org/react";
 // import React, { useContext } from "react";
-import { useState, useReducer, useEffect } from "react";
-import uniqid from "uniqid";
+// import { useState, useReducer, useEffect } from "react";
+// import uniqid from "uniqid";
 // import { taskReducer } from "../../reducer/taskReducer";
 import "./Sidebar.css";
 
-// Delete taskDb when backend works
-import { taskDb } from "../../db/taskDb";
-import { useFetch } from "../../customHooks/useFetch";
+//? Delete taskDb when backend works
+// import { taskDb } from "../../db/taskDb";
+// import { useFetch } from "../../customHooks/useFetch";
 
 
 const Sidebar = () => { 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");  
-  const [user, setUser] = useState("")
-  const [date, setDate] = useState("")
+  // const [title, setTitle] = useState("");
+  // const [description, setDescription] = useState("");  
+  // const [user, setUser] = useState("")
+  // const [date, setDate] = useState("")
 
-  const [tasks, setTasks] = useState([]);
+  // const [tasks, setTasks] = useState([]);
 
   // const url = "http://localhost:4001/dashboard/tasks";
   // const getTasks = async () => {
@@ -28,24 +32,24 @@ const Sidebar = () => {
   //   getTasks();
   // }, []);  
 
-  console.log(tasks);  
+  // console.log(tasks);  
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (title && description) {      
-      const taskInfo = { id: uniqid(), title, description, user, date };      
-      setTasks([...tasks, taskInfo])
-      setTitle("");
-      setDescription("");
-    }
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (title && description) {      
+  //     const taskInfo = { id: uniqid(), title, description, user, date };      
+  //     setTasks([...tasks, taskInfo])
+  //     setTitle("");
+  //     setDescription("");
+  //   }
+  // };
  
 
   return (
     <Container className="container__sidebar">
       <section className="sidebar__btn--section">
         <article className="sidebar__btn--article">
-          <form className="" onSubmit={handleSubmit}>
+          {/* <form className="" onSubmit={handleSubmit}>
             <div className="">
               <label className="title" htmlFor="title">
                 Task title:
@@ -106,7 +110,7 @@ const Sidebar = () => {
             </div>
 
             <button type="submit">Add Task</button>
-          </form>
+          </form> */}
 
           <button className="sidebar__task--btn">
             <i className="bx bx-task"></i> Task

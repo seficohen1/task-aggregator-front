@@ -1,29 +1,24 @@
-.register__container {
+.registertask__form {
   display: flex;
-  height: 45rem;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   font-family: var(--project-font);
 }
 
-.register__title {
+.task__title {
   margin-bottom: 2rem;
   font-size: 1.3rem;
   font-weight: 600;
   letter-spacing: .1rem;
 }
 
-.register__form {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
+.registertask__input{
+  width: 18rem;
+  margin-bottom: 1rem;
 }
 
-.register__article {
-  display: flex;
-  flex-direction: column;
-}
-
-.register__btn {
+.registertask__btn {
   margin-top: 1.5rem;
   color: var(--fifth-color);
   font-family: var(--project-font);
@@ -32,9 +27,4 @@
   text-decoration: none;
   letter-spacing: .4rem;
   background-color: var(--contrast-color);
-}
-
-.register__input {
-  width: 20rem;
-  margin: 0 0 1rem;
 }

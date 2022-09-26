@@ -1,0 +1,51 @@
+.container__employee{
+  display: flex;
+  font-family: var(--project-font);
+}
+
+.container__gird--employee {
+  display: flex;
+  align-items: center;
+  height: 5rem;
+  margin: .5rem 0 0 0;
+  padding: 0;
+  border-left: 5px solid var(--fifth-color);
+  border-radius: .4rem;
+  background-color: rgba(255, 255, 255, 0.353);
+}
+.container__gird--employee:hover {
+  background-color: rgba(255, 255, 255, 0.637);
+}
+
+.emp__grid:nth-child(1) {
+  padding-left: 2.4rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.emp__grid:nth-child(2) {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.emp__grid:nth-child(3) {
+  padding-left: 0;
+  font-size: .9rem;
+}
+
+.emp__grid:nth-child(4) {
+  padding: 1.5rem 0 0 0;
+  font-size: 1.1rem;
+  font-weight: 200;
+} 
+.emp-edit-modal-btn {
+  all: unset;
+  cursor: pointer;
+}
+
+.emp__role {
+  align-self: center;
+}
+.edit_emp{
+ padding: 1rem;
+}
