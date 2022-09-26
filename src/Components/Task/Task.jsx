@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 const Task = (props) => {
   const { dbId, user, title, status } = props;
   // format date for dashboard, using func from utils
+  // console.log("user", user.firstName)
   const dueDate = dates.getLongDate(props.dueDate);
 
   

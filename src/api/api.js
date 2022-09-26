@@ -25,6 +25,13 @@ async function fetchAll (urlPath, setState) {
   }
 }
 
+async function createNewTask(taskPost){ 
+axios
+      .post("http://localhost:4001/dashboard/tasks", taskPost)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+}
+
 async function updateTask(dbId, body) {
   const options = {
     method: "PATCH",
@@ -93,10 +100,10 @@ const getUserFromName = async (urlPath, data) => {
   try {
     const res = await fetch(`${urlPath}/${data.firstName}/${data.lastName}`);
     const newObj = await res.json();
-    return newObj;
+    return newObj;    
   } catch (error) {
     console.log(error)
   }
 }
 
-export { fetchAll, updateTask, deleteTask, updateUser, getAllUsers, createNewUser, getUserFromName };
+export { fetchAll, createNewTask, deleteTask, updateTask, updateUser, getAllUsers, createNewUser, getUserFromName };
