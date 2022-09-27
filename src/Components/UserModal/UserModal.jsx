@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Modal, Button, Text, Input, Row, Checkbox } from "@nextui-org/react";
+import { Modal, Text } from "@nextui-org/react";
 import UpdateUserForm from "../UpdateUserForm/UpdateUserForm";
 import AuthContext from "../../context/AuthContext";
 
@@ -14,7 +14,7 @@ const UserModal = ({
 }) => {
   const { user } = useContext(AuthContext);
   return (
-    <div>
+    <main>
       <Modal
         closeButton
         aria-labelledby="Edit user"
@@ -41,7 +41,7 @@ const UserModal = ({
           />
         </Modal.Body>
       </Modal>
-    </div>
+    </main>
   );
 };
 

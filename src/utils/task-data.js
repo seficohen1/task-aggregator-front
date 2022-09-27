@@ -7,7 +7,7 @@ const isChangedUser = (data, user) => {
     return true;
   } else {
     console.log('Assigned user not updated in form')
-    return false;
+    return false;s
   }
 }
 
@@ -20,7 +20,8 @@ const createUpdatedTask = (data, newUser) => {
     status: data.status,
     dueDate: data.dueDate,    
   }
-  const newUserId = newUser.userByName[0]._id || null;
+  let newUserId;
+  if (newUser) newUserId = newUser.userByName[0]._id || null;
   if (newUserId) updatedTask.user = newUserId;
   return updatedTask;
 }

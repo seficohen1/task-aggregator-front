@@ -1,21 +1,25 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
-// const currentUser = localStorage.getItem('user')
+const localStorageUser = JSON.parse(localStorage.getItem("user")) || [];
+const localStorageToken = JSON.parse(localStorage.getItem("token")) || [];
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(localStorageUser);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:4001/dashboard/users")
-      .then((data) => setUser(data.data.results[3]));
-  }, []);
+  const [token, setToken] = useState(localStorageToken);
+  
+ useEffect(() => {
+    localStorage.setItem("token", JSON.stringify(token));
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [token, user]); 
 
+    // console.log('token: ', token)
+    // console.log('user: ', user)
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider value={{ user, setUser, token, setToken }}>
       {children}
     </AuthContext.Provider>
   );

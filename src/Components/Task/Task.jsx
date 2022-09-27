@@ -1,3 +1,4 @@
+import React, {useContext} from 'react'
 import { Grid, Dropdown, Collapse, Button } from "@nextui-org/react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Task.css";
@@ -5,9 +6,13 @@ import { deleteTask } from "../../api/api";
 import TaskStatusSelect from "../TaskStatusSelect/TaskStatusSelect";
 import { dates, alerts } from "../../utils/index";
 import Swal from "sweetalert2";
+import AuthContext from '../../context/AuthContext';
 
 const Task = (props) => {
+  
+  const { token } = useContext(AuthContext)
   const { dbId, user, title, status } = props;
+  
   // format date for dashboard, using func from utils
   // console.log("user", user.firstName)
   const navigate = useNavigate();
@@ -53,7 +58,7 @@ const Task = (props) => {
                 <Button onClick={() => {
                   Swal.fire(alerts.confirmAlert).then((result)=> {
                     if (result.isConfirmed) {
-                      deleteTask(dbId)
+                      deleteTask(dbId, token.token)
                       Swal.fire(alerts.taskDeleted)
                     }
                   })

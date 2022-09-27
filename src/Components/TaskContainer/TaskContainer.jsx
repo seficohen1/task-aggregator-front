@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import dataTest from "../../dataTest/dataTest";
 import Task from "../Task/Task";
@@ -6,14 +6,15 @@ import "./TaskContainer.css";
 import TaskBar from "./TaskBar/TaskBar";
 import uniqid from "uniqid";
 import { fetchAll } from "../../api/api";
+import AuthContext from "../../context/AuthContext";
 
 const TaskContainer = (props) => {
   const [docs, setDocs] = useState([]);
+  const { token } = useContext(AuthContext)
 
   useEffect(() => {
-    fetchAll('tasks', setDocs);
+    fetchAll('tasks', setDocs, token.token);
   }, []);
-
   
   return (
     <>

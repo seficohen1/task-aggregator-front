@@ -6,8 +6,8 @@
 
 .register__title {
   margin-bottom: 2rem;
-  font-size: 1.3rem;
-  font-weight: 600;
+  font-size: 1.55rem;
+  font-weight: 700;
   letter-spacing: .1rem;
 }
 
@@ -25,13 +25,18 @@
 
 .register__btn {
   margin-top: 1.5rem;
+  background-color: #8bdcff;
   color: var(--fifth-color);
   font-family: var(--project-font);
   font-size: 1rem;
-  font-weight: 300;
+  font-weight: 500;
   text-decoration: none;
   letter-spacing: .4rem;
-  background-color: var(--contrast-color);
+  cursor: default;
+}
+
+.register__btn:hover {
+  background-color: #68d0fd;
 }
 
 .register__input {

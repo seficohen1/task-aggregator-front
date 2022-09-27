@@ -2,14 +2,14 @@ import React, {useContext} from "react";
 import { Navigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
-const ProtectedRoute = ({children}) => {
-  const { token } = useContext(AuthContext)
+const ProtectedAdmin = ({children}) => {
+  const { user } = useContext(AuthContext)
   
   return (
-    token.token ?
+    user.role === 'admin' ?
       children : 
-      <Navigate to='/' />
+      <Navigate to='/dashboard' />
   );
 };
 
-export default ProtectedRoute;
+export default ProtectedAdmin;

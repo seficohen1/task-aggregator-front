@@ -1,5 +1,5 @@
 import "./TaskDetail.css";
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Input, Grid, Textarea } from "@nextui-org/react";
 import Swal from 'sweetalert2'
@@ -10,17 +10,17 @@ import { dates } from '../../utils/index'
 import { dataHelpers } from '../../utils/index'
 import { alerts } from "../../utils/index";
 import { getUserFromName } from "../../api/api";
+import AuthContext from "../../context/AuthContext";
 
 
 export default function TaskDetail() {
-  
+  const {token, user:loggedUser} = useContext(AuthContext)
   const location = useLocation() || null;
   const navigate = useNavigate() || null;
   const { user, description, dbId, status, title, dueDate } = location.state;    
   const formattedDate = dates.getFormattedDate(dueDate) ;
   const minDate = dates.getFormattedDate(new Date(Date.now())) 
 
-  
   const { 
     register, 
     handleSubmit, 
@@ -30,24 +30,28 @@ export default function TaskDetail() {
       status: status,
       firstName: user.firstName,
       lastName: user.lastName,
-      dueDate: minDate,
+      dueDate: formattedDate,
   }});
 
 
   const onSubmit = async (data) => {
-    console.log(data)
+    let newUser = false;
     if (dataHelpers.isChangedUser(data, user)) {
       const urlPath = `http://localhost:4001/dashboard/users`;
-      const newUser = await getUserFromName(urlPath, data);
-      console.log(newUser)
+      newUser = await getUserFromName(urlPath, data, token.token);
+      
       if (newUser.userByName.length === 0) {
         Swal.fire(alerts.warningCreateUser);
         return;
-      }
-      const task = dataHelpers.createUpdatedTask(data, newUser);
-      updateTask(dbId, task)
-      Swal.fire(alerts.updatedTaskSuccess);
-    }
+      } 
+    } 
+    const task = dataHelpers.createUpdatedTask(data, newUser);
+    updateTask(dbId, task)
+    Swal.fire(alerts.updatedTaskSuccess);
+    
+    setTimeout(() => {
+      navigate('/dashboard')
+    }, 3000)
   }
 
 
@@ -77,7 +81,7 @@ export default function TaskDetail() {
               {...register("firstName", {
                 required: 'First name is required'
               }) }  
-              // readOnly
+              readOnly = { (loggedUser.role === 'user') ? true : false }
             />
             <Input
               className="task__input"
@@ -87,7 +91,7 @@ export default function TaskDetail() {
               {...register("lastName", {
                 required: 'Last name is required'
               }) }  
-              // readOnly           
+              readOnly = { (loggedUser.role === 'user') ? true : false }
             />
           </article>
           <article className="task__article">
@@ -106,7 +110,7 @@ export default function TaskDetail() {
               className="task__input"
               label="Due Date"
               type="date"
-              placeholder={minDate}
+              placeholder={dueDate}
               min={minDate}
               {...register("dueDate", {
                 required: 'Due date is required', 

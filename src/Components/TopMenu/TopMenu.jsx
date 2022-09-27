@@ -1,10 +1,21 @@
-import React from 'react';
 import { Navbar, Button, Image } from '@nextui-org/react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import logoTopMenu from '../../assets/images/logo-navbar.png'
 import './TopMenu.css'
+import AuthContext from '../../context/AuthContext';
+import { useContext } from 'react';
+
 
 const TopMenu = () => {
+	const { setUser, setToken, user:loggedUser } = useContext(AuthContext)
+	const navigate = useNavigate()
+	const logout = () => {
+		navigate('/', { replace: true })
+		setToken([])
+		setUser([])
+	}
+	console.log(loggedUser)
+	
 	return (
 		<>
 		<Navbar className='container__navbar'>
@@ -14,12 +25,16 @@ const TopMenu = () => {
 						className='logo__navbar--image'
 						src={logoTopMenu}
 						alt='logotype'
+						onClick={() => {navigate("/dashboard")}}
 					 />
 				</div>
 			</Navbar.Brand>
 			<Navbar.Content>
 				<Navbar.Item>
-					<Link className='link__navbar' to='/'><Button size='sm' className='btn__navbar'>Logout</Button></Link>
+					<p>{loggedUser.firstName} logged in as: {loggedUser.role}</p>
+				</Navbar.Item>
+				<Navbar.Item>
+					<Button size='sm' className='btn__navbar' onClick={logout}>Logout</Button>
 				</Navbar.Item>
 			</Navbar.Content>
 		</Navbar>
