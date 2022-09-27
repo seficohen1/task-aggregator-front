@@ -25,7 +25,7 @@ async function fetchAll (urlPath, setState) {
   }
 }
 
-async function createNewTask(taskPost){ 
+async function createNewTask(taskPost) {
 axios
       .post("http://localhost:4001/dashboard/tasks", taskPost)
       .then((res) => console.log(res))

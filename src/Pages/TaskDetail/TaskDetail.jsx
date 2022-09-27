@@ -1,6 +1,6 @@
 import "./TaskDetail.css";
 import { useState } from 'react'
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Input, Grid, Textarea } from "@nextui-org/react";
 import Swal from 'sweetalert2'
 import { useForm } from "react-hook-form";
@@ -15,6 +15,7 @@ import { getUserFromName } from "../../api/api";
 export default function TaskDetail() {
   
   const location = useLocation() || null;
+  const navigate = useNavigate() || null;
   const { user, description, dbId, status, title, dueDate } = location.state;    
   const formattedDate = dates.getFormattedDate(dueDate) ;
   const minDate = dates.getFormattedDate(new Date(Date.now())) 
