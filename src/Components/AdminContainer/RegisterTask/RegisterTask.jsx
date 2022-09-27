@@ -41,7 +41,7 @@ const RegisterTask = () => {
   };
 
   const createTask = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     const urlPath = "http://localhost:4001/dashboard/users";
     const user = await getUserFromName(urlPath, task, token.token);
     console.log(user);
@@ -54,6 +54,7 @@ const RegisterTask = () => {
 	console.log("taskPost", taskPost)
 
 	createNewTask(taskPost)
+  
   };
 
   return (
@@ -112,10 +113,7 @@ const RegisterTask = () => {
             value={task.date}
             onChange={handleChange}
           />
-        </article>
-
-        {/* <TaskStatusSelect dbId={dbId} status={status} user={user} /> */}
-        {/* <TaskStatusSelect /> */}
+        </article>        
 
         <button
           className="registertask__btn"
@@ -123,6 +121,14 @@ const RegisterTask = () => {
           onClick={createTask}
         >
           Add Task
+        </button>
+
+        <button
+          className="registertask__btn"
+          type="submit" 
+          onClick={() => navigate('/dashboard')}
+        >
+          Dashboard
         </button>
       </form>
     </main>
