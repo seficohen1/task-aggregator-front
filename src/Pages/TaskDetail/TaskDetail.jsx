@@ -21,7 +21,6 @@ export default function TaskDetail() {
   const formattedDate = dates.getFormattedDate(dueDate) ;
   const minDate = dates.getFormattedDate(new Date(Date.now())) 
 
-  console.log(loggedUser)
   const { 
     register, 
     handleSubmit, 

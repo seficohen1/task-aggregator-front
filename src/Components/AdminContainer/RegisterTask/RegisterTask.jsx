@@ -49,12 +49,16 @@ const RegisterTask = () => {
     if (user.userByName.length === 0) {
       return Swal.fire(alerts.warningCreateUser);
     } 
+    console.log(task)
+    const taskPost = dataHelpers.createUpdatedTask(task, user) 
+    console.log("taskPost", taskPost)
 
-	const taskPost = dataHelpers.createUpdatedTask(task, user) 
-	console.log("taskPost", taskPost)
+    createNewTask(taskPost)
+    Swal.fire(alerts.taskCreated);
 
-	createNewTask(taskPost)
-  
+    setTimeout(() => {
+      navigate('/dashboard')
+    }, 3000)
   };
 
   return (

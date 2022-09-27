@@ -135,9 +135,6 @@ const getAllUsers = async (url, setState, token) => {
 };
 
 const getUserFromName = async (urlPath, data, token) => {
-  console.log(urlPath)
-  console.log(data)
-  console.log(token)
   try {
     const res = await fetch(`${urlPath}/${data.firstName}/${data.lastName}`, {
       headers: { Authorization: `Bearer ${token}` },
