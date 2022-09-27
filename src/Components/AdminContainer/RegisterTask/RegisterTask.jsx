@@ -25,17 +25,16 @@ const RegisterTask = () => {
     description: "",
     firstName: "",
     lastName: "",
-    date: "",
+    dueDate: "",
     status: "",
   });
 
   const handleChange = (e) => {    
-    // e.preventDefault()
     const { name, value } = e.target;    
     setTask((prev) => {
       return {
-        ...prev,
-        [name]: value,
+          ...prev,
+          [name]: value,
       };
     });
   };
@@ -44,20 +43,19 @@ const RegisterTask = () => {
     e.preventDefault();
     const urlPath = "http://localhost:4001/dashboard/users";
     const user = await getUserFromName(urlPath, task, token.token);
-    console.log(user);
 
     if (user.userByName.length === 0) {
       return Swal.fire(alerts.warningCreateUser);
     } 
-    console.log(task)
     const taskPost = dataHelpers.createUpdatedTask(task, user) 
-    console.log("taskPost", taskPost)
+    console.log(taskPost)
 
     createNewTask(taskPost)
     Swal.fire(alerts.taskCreated);
 
     setTimeout(() => {
       navigate('/dashboard')
+      
     }, 3000)
   };
 
@@ -113,10 +111,10 @@ const RegisterTask = () => {
             label="Date"
             type="date"
             id="date"
-            name="date"
+            name="dueDate"
             placeholder={minDate}
             min={minDate}
-            value={task.date}
+            value={minDate || task.dueDate}
             onChange={handleChange}
           />
         </article>        

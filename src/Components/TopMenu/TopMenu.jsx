@@ -14,7 +14,6 @@ const TopMenu = () => {
 		setToken([])
 		setUser([])
 	}
-	console.log(loggedUser)
 	
 	return (
 		<>

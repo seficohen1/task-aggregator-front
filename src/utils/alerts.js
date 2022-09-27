@@ -24,7 +24,6 @@ const updatedTaskSuccess = {
   text: `The task has been updated`,
   icon: 'success',
   iconColor: '#99CDEB',
-  toast: true,
   timer: 3000,
   showConfirmButton: false,
 }
@@ -34,7 +33,6 @@ const taskCreated = {
   text: `The task has been created`,
   icon: 'success',
   iconColor: '#99CDEB',
-  toast: true,
   timer: 5000,
   showConfirmButton: false,
 }

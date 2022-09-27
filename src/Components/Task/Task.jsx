@@ -47,7 +47,7 @@ const Task = (props) => {
               aria-label="Actions"
             >
               <Dropdown.Item key="edit" textValue="edit task">
-                <Button onClick={() => {
+                <Button className="dropdown-selection" onClick={() => {
                   navigate('/task', { state: props})
                 // to='/task' state={props}>
                 }}>
@@ -55,7 +55,7 @@ const Task = (props) => {
                 </Button>
               </Dropdown.Item>
               <Dropdown.Item key="delete" color="error">
-                <Button onClick={() => {
+                <Button className="dropdown-selection" onClick={() => {
                   Swal.fire(alerts.confirmAlert).then((result)=> {
                     if (result.isConfirmed) {
                       deleteTask(dbId, token.token)

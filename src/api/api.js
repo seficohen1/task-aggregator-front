@@ -32,19 +32,6 @@ async function fetchAll(urlPath, setState, token) {
   }
 }
 
-// async function createNewTask(taskPost, token) {
-//   axios({
-//     method: "post",
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//     url: "http://localhost:4001/dashboard/tasks",
-//     data: taskPost,
-//   })
-//     .then((res) => console.log(res))
-//     .catch((err) => console.log(err));
-// }
-
 async function createNewTask(taskPost, token) {
     axios({
       method: "post",

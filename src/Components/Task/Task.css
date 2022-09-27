@@ -82,3 +82,10 @@ background-color: #99CDEB;
 .task__select--option:nth-child(5) {
 background-color: #EB9999;
 }
+
+.dropdown-selection {
+  background-color: transparent;
+  color: black;
+  font-size: 1.1rem;
+  letter-spacing: .2rem;
+}

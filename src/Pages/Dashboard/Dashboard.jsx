@@ -14,7 +14,6 @@ const DashboardUser = () => {
   const { user } = useContext(AuthContext)
   const [isTaskSelected, setIsTaskSelected] = useState(true);
   const navigate = useNavigate();
-  console.log(user.role)
   
   const isAdmin = user.role === 'admin' ? true : false
   

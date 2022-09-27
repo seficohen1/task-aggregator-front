@@ -7,14 +7,14 @@ import { useForm } from "react-hook-form";
 
 
 const TaskStatusSelect = (props) => {
-  const { dbId } = props;
+  const { dbId, status } = props;
   const { register } = useForm();
-  const [currentStatus, setCurrentStatus] = useState({ status: 'none' })
+  const [currentStatus, setCurrentStatus] = useState({ status })
 
   const dropdownBackgroundColor = styles.setStatusDropdownColors(currentStatus.status)
 
   useEffect(() => {
-    setCurrentStatus({ status: props.status })
+    setCurrentStatus({ status: status })
   }, [])
 
   function handleChange (e) {    
