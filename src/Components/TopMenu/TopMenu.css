@@ -30,3 +30,23 @@
 .logo__navbar--image{
   height: 6.2rem;
 }
+
+.role__navbar--p {
+  font-weight: 300;
+}
+
+.firstname__span {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.role__span {
+  padding: .2rem .6rem;
+  border-radius: .8rem;
+  background-color: rgb(140, 31, 213);
+  font-size: .7rem;
+  font-weight: 500;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: .1rem;
+}

@@ -29,8 +29,8 @@ const TopMenu = () => {
 				</div>
 			</Navbar.Brand>
 			<Navbar.Content>
-				<Navbar.Item>
-					<p>{loggedUser.firstName} logged in as: {loggedUser.role}</p>
+				<Navbar.Item className='role__navbar--p'>
+					<p><span className="firstname__span">{loggedUser.firstName}</span> <span className="role__span">{loggedUser.role}</span></p>
 				</Navbar.Item>
 				<Navbar.Item>
 					<Button size='sm' className='btn__navbar' onClick={logout}>Logout</Button>
