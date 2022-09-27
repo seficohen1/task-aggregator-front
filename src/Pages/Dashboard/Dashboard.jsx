@@ -15,7 +15,7 @@ const DashboardUser = () => {
   return (
     <>
       <main className="container__dashboard">
-        <TopMenu />
+        {/* <TopMenu /> */}
         <Grid.Container gap={2} justify="center">
           <Grid md={2}>
             {/* use sidebar component */}

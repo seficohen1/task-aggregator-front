@@ -1,4 +1,4 @@
-import React, {useContext} from 'React'
+import React, {useContext} from 'react'
 import { Grid, Dropdown, Collapse, Button } from "@nextui-org/react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Task.css";

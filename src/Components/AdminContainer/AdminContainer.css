@@ -7,9 +7,11 @@
 .admin__grid--container {
   display: flex;
   align-items: center;
+  justify-content: space-around;
 }
 
-.admin__grid {
+
+.admin__grid:nth-child(1) {
   display: flex;
   justify-content: center;
 }

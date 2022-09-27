@@ -4,10 +4,9 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  height: 40rem;
-  font-family: var(--project-font);
-  height: 110vh;
   margin-top: -4rem;
+  height: 90vh;
+  font-family: var(--project-font);
 }
 
 .task__title {
@@ -22,14 +21,12 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-
 }
 
 .task__article {
   display: flex;
   align-items: center;
   justify-content: center;  
-  
 }
 
 .errors {
@@ -41,7 +38,6 @@
   flex-direction: column;
   /* align-items: flex-start; */
   gap: 1rem;
-  
 }
 
 

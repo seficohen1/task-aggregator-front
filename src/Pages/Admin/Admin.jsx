@@ -15,7 +15,7 @@ function Admin() {
         </Grid>
         <Grid md={10}>
           <Container>
-            {/* use admin container component */}
+            {/* use admin container component  */}
             <AdminContainer />
           </Container>
         </Grid>

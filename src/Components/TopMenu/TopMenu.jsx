@@ -5,6 +5,7 @@ import logoTopMenu from '../../assets/images/logo-navbar.png'
 import './TopMenu.css'
 import AuthContext from '../../context/AuthContext';
 
+
 const TopMenu = () => {
 	const { setUser, setToken } = useContext(AuthContext)
 	const navigate = useNavigate()
@@ -23,6 +24,7 @@ const TopMenu = () => {
 						className='logo__navbar--image'
 						src={logoTopMenu}
 						alt='logotype'
+						onClick={() => {navigate("/dashboard")}}
 					 />
 				</div>
 			</Navbar.Brand>
