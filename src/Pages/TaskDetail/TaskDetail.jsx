@@ -14,14 +14,14 @@ import AuthContext from "../../context/AuthContext";
 
 
 export default function TaskDetail() {
-  const {token} = useContext(AuthContext)
+  const {token, user:loggedUser} = useContext(AuthContext)
   const navigate = useNavigate();
   const location = useLocation() || null;
   const { user, description, dbId, status, title, dueDate } = location.state;    
   const formattedDate = dates.getFormattedDate(dueDate) ;
   const minDate = dates.getFormattedDate(new Date(Date.now())) 
 
-  
+  console.log(loggedUser)
   const { 
     register, 
     handleSubmit, 
@@ -38,17 +38,15 @@ export default function TaskDetail() {
   const onSubmit = async (data) => {
     let newUser = false;
     if (dataHelpers.isChangedUser(data, user)) {
-      console.log('line41')
       const urlPath = `http://localhost:4001/dashboard/users`;
       newUser = await getUserFromName(urlPath, data, token.token);
-      console.log(newUser)
+      
       if (newUser.userByName.length === 0) {
         Swal.fire(alerts.warningCreateUser);
         return;
       } 
     } 
     const task = dataHelpers.createUpdatedTask(data, newUser);
-    console.log(task)
     updateTask(dbId, task)
     Swal.fire(alerts.updatedTaskSuccess);
     
@@ -84,7 +82,7 @@ export default function TaskDetail() {
               {...register("firstName", {
                 required: 'First name is required'
               }) }  
-              // readOnly
+              readOnly = { (loggedUser.role === 'user') ? true : false }
             />
             <Input
               className="task__input"
@@ -94,7 +92,7 @@ export default function TaskDetail() {
               {...register("lastName", {
                 required: 'Last name is required'
               }) }  
-              // readOnly           
+              readOnly = { (loggedUser.role === 'user') ? true : false }
             />
           </article>
           <article className="task__article">

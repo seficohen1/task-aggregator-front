@@ -12,6 +12,7 @@ const Task = (props) => {
   
   const { token } = useContext(AuthContext)
   const { dbId, user, title, status } = props;
+  
   // format date for dashboard, using func from utils
   // console.log("user", user.firstName)
   const navigate = useNavigate();
