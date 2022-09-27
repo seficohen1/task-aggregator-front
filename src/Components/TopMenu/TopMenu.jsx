@@ -7,13 +7,14 @@ import { useContext } from 'react';
 
 
 const TopMenu = () => {
-	const { setUser, setToken } = useContext(AuthContext)
+	const { setUser, setToken, user:loggedUser } = useContext(AuthContext)
 	const navigate = useNavigate()
 	const logout = () => {
 		navigate('/', { replace: true })
 		setToken([])
 		setUser([])
 	}
+	console.log(loggedUser)
 	
 	return (
 		<>
@@ -29,6 +30,9 @@ const TopMenu = () => {
 				</div>
 			</Navbar.Brand>
 			<Navbar.Content>
+				<Navbar.Item>
+					<p>{loggedUser.firstName} logged in as: {loggedUser.role}</p>
+				</Navbar.Item>
 				<Navbar.Item>
 					<Button size='sm' className='btn__navbar' onClick={logout}>Logout</Button>
 				</Navbar.Item>
