@@ -109,6 +109,8 @@ const RegisterTask = () => {
             type="date"
             id="date"
             name="date"
+            placeholder={minDate}
+            min={minDate}
             value={task.date}
             onChange={handleChange}
           />

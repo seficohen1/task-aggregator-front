@@ -31,24 +31,30 @@ export default function TaskDetail() {
       status: status,
       firstName: user.firstName,
       lastName: user.lastName,
-      dueDate: minDate,
+      dueDate: formattedDate,
   }});
 
 
   const onSubmit = async (data) => {
-    console.log(data)
+    let newUser = false;
     if (dataHelpers.isChangedUser(data, user)) {
+      console.log('line41')
       const urlPath = `http://localhost:4001/dashboard/users`;
-      const newUser = await getUserFromName(urlPath, data, token.token);
+      newUser = await getUserFromName(urlPath, data, token.token);
       console.log(newUser)
       if (newUser.userByName.length === 0) {
         Swal.fire(alerts.warningCreateUser);
         return;
-      }
-      const task = dataHelpers.createUpdatedTask(data, newUser);
-      updateTask(dbId, task)
-      Swal.fire(alerts.updatedTaskSuccess);
-    }
+      } 
+    } 
+    const task = dataHelpers.createUpdatedTask(data, newUser);
+    console.log(task)
+    updateTask(dbId, task)
+    Swal.fire(alerts.updatedTaskSuccess);
+    
+    setTimeout(() => {
+      navigate('/dashboard')
+    }, 3000)
   }
 
 
@@ -107,7 +113,7 @@ export default function TaskDetail() {
               className="task__input"
               label="Due Date"
               type="date"
-              placeholder={minDate}
+              placeholder={dueDate}
               min={minDate}
               {...register("dueDate", {
                 required: 'Due date is required', 
