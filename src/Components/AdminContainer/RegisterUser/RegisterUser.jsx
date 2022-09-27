@@ -3,7 +3,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import { createNewUser } from "../../../api/api";
 import AuthContext from '../../../context/AuthContext'
-
+import { alerts } from '../../../utils/index'
+import Swal from 'sweetalert2'
 
 // import { useForm } from "react-hook-form";
 import "./RegisterUser.css";
@@ -32,8 +33,12 @@ const RegisterUser = () => {
 
   const handleClick = () => {
     createNewUser(newUser, token.token);
+    Swal.fire(alerts.userCreated)
     
-    navigate("/dashboard", { replace: true });
+    setTimeout(() => {
+      navigate("/dashboard", { replace: true });
+    }, 3000)
+    
   };
 
   return (

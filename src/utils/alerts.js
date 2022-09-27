@@ -37,6 +37,15 @@ const taskCreated = {
   showConfirmButton: false,
 }
 
+const userCreated = {
+  title: 'Well done!',
+  text: `A new user has been created`,
+  icon: 'success',
+  iconColor: '#99CDEB',
+  timer: 5000,
+  showConfirmButton: false,
+}
+
 const taskDeleted = {
   title: 'Well done!',
   text: `The task has been deleted`,
@@ -53,7 +62,8 @@ const alerts = {
   updatedTaskSuccess,
   warningCreateUser,
   taskDeleted,
-  taskCreated
+  taskCreated,
+  userCreated
 }
 
 
