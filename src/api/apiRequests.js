@@ -85,7 +85,10 @@ export const modifyTask = async (id, taskData, token) => {
       Authorization: `Bearer ${token}`,
     },
     url: tasksURL + "/" + id,
-    data: taskData,
+    data: firstName,
+    lastName,
+    email,
+    role: role === "undefined" ? "user" : dropDownInput,
   })
     .then((res) => {
       console.log(res);

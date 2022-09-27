@@ -1,7 +1,8 @@
 import { Button, Input } from "@nextui-org/react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import { createNewUser } from "../../../api/api";
+import AuthContext from '../../../context/AuthContext'
 
 
 // import { useForm } from "react-hook-form";
@@ -15,6 +16,9 @@ const RegisterUser = () => {
     password: "",
     role: "",
   });
+
+  
+  const { token } = useContext(AuthContext)
   
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -27,7 +31,7 @@ const RegisterUser = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    createNewUser(newUser);
+    createNewUser(newUser, token.token);
     
     navigate("/dashboard", { replace: true });
   };

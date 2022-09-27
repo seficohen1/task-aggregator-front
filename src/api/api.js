@@ -1,9 +1,15 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const createNewUser = async (newUser) => {
-  axios
-    .post("http://localhost:4001/dashboard/users", newUser)
+const createNewUser = async (newUser, token) => {
+  axios({
+    method: "post",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    url: "http://localhost:4001/dashboard/users",
+    data: newUser,
+  })
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
 };
@@ -11,9 +17,7 @@ const createNewUser = async (newUser) => {
 async function fetchAll(urlPath, setState, token) {
   try {
     const res = await fetch(`http://localhost:4001/dashboard/${urlPath}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { Authorization: `Bearer ${token}` },
     });
     const data = await res.json();
     let results;
@@ -26,6 +30,19 @@ async function fetchAll(urlPath, setState, token) {
   } catch (error) {
     console.error(error);
   }
+}
+
+async function createNewTask(taskPost, token) {
+  axios({
+    method: "post",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    url: "http://localhost:4001/dashboard/tasks",
+    data: taskPost,
+  })
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
 }
 
 async function updateTask(dbId, body, token) {
@@ -42,23 +59,39 @@ async function updateTask(dbId, body, token) {
     const baseUrl = "http://localhost:4001/dashboard/tasks/";
     const res = await fetch(`${baseUrl}${dbId}`, options);
     const data = await res.json();
-    console.log(data);
+    return data;
   } catch (error) {
     console.log(error);
   }
 }
 
+const deleteTask = (id, token) => {
+  axios
+    .delete(`http://localhost:4001/dashboard/tasks/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+};
+
 // edit user  details
 
-const updateUser = async (url, options) => {
+const updateUser = async (url, options, token) => {
   const { firstName, lastName, email, role, dropDownInput } = options;
 
   try {
-    const request = await axios.patch(url, {
-      firstName,
-      lastName,
-      email,
-      role: role === "undefined" ? "user" : dropDownInput,
+    const request = await axios({
+      method: "patch",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      url: url,
+      data: {
+        firstName,
+        lastName,
+        email,
+        role: role === "undefined" ? "user" : dropDownInput,
+      },
     });
     if (request.status === 200) {
       Swal.fire({
@@ -76,13 +109,36 @@ const updateUser = async (url, options) => {
   }
 };
 
-const getAllUsers = async (url, setState) => {
+const getAllUsers = async (url, setState, token) => {
   try {
-    const request = await axios(url);
+    const request = await axios(url, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     if (request.status === 200) setState(request.data.results);
   } catch (error) {
     throw Error(error);
   }
 };
 
-export { fetchAll, updateTask, updateUser, getAllUsers, createNewUser };
+const getUserFromName = async (urlPath, data, token) => {
+  try {
+    const res = await fetch(`${urlPath}/${data.firstName}/${data.lastName}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const newObj = await res.json();
+    return newObj;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export {
+  fetchAll,
+  createNewTask,
+  deleteTask,
+  updateTask,
+  updateUser,
+  getAllUsers,
+  createNewUser,
+  getUserFromName,
+};

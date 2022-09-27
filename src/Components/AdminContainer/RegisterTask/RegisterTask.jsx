@@ -1,28 +1,37 @@
 import React from "react";
 import { Button, Container, Input } from "@nextui-org/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-// import { useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+
+import { dates, alerts, dataHelpers } from "../../../utils/index";
 import axios from "axios";
 import uniqid from "uniqid";
+import AuthContext from '../../../context/AuthContext';
+
+// import TaskStatusSelect from "../../TaskStatusSelect/TaskStatusSelect";
 import "./RegisterTask.css";
+import { getUserFromName, createNewTask } from "../../../api/api";
 
 const RegisterTask = () => {
-  // const [title, setTitle] = useState('');
-  // const [description, setDescription] = useState('');
-  // const [user, setUser] = useState('');
-  // const [date, setDate] = useState('');
-
-  // const [tasks, setTasks] = useState([]);
-
   const navigate = useNavigate();
-//   const { register, handleSubmit, getValues, watch, formState: { errors } } = useForm();
+  const minDate = dates.getFormattedDate(new Date(Date.now())) 
+  
+  const { token } = useContext(AuthContext)
 
-  const [task, setTask] = useState({});
+  const [task, setTask] = useState({
+    title: "",
+    description: "",
+    firstName: "",
+    lastName: "",
+    date: "",
+    status: "",
+  });
 
-  const handleChange = (e) => {
-    // console.log(e.target)
-    const { name, value } = e.target;
+  const handleChange = (e) => {    
+    // e.preventDefault()
+    const { name, value } = e.target;    
     setTask((prev) => {
       return {
         ...prev,
@@ -31,19 +40,20 @@ const RegisterTask = () => {
     });
   };
 
-  console.log(task);
+  const createTask = async (e) => {
+    // e.preventDefault();
+    const urlPath = "http://localhost:4001/dashboard/users";
+    const user = await getUserFromName(urlPath, task, token.token);
+    console.log(user);
 
-  const createTask = (e) => {
-    // e.preventDefault()
-    console.log("Add task!");
+    if (user.userByName.length === 0) {
+      return Swal.fire(alerts.warningCreateUser);
+    } 
 
-    axios
-      .post("http://localhost:4001/dashboard/tasks", task)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+	const taskPost = dataHelpers.createUpdatedTask(task, user) 
+	console.log("taskPost", taskPost)
 
-    navigate("/dashboard");
-	window.location.reload()
+	createNewTask(taskPost)
   };
 
   return (
@@ -68,41 +78,45 @@ const RegisterTask = () => {
           value={task.description}
           onChange={handleChange}
         />
-        {/* <Input
-          className='registertask__input'
-						label='First name'
-						type='text'
-						id='user'
-						name='user'
-						value={task.user.firstName}
-						onChange={handleChange}
-					/> */}
-        {/* <Input
-          className='registertask__input'
-						label='Last name'
-						type='text'
-						id='user'
-						name='user'
-						value={task.user.lastName}
-						onChange={handleChange}
-					/> */}
+        <Input
+          className="registertask__input"
+          label="First name"
+          type="text"
+          id="firstName"
+          name="firstName"
+          value={task.firstName}
+          onChange={handleChange}
+        />
+        <Input
+          className="registertask__input"
+          label="Last name"
+          type="text"
+          id="lastName"
+          name="lastName"
+          value={task.lastName}
+          onChange={handleChange}
+        />
+        <Input
+          className="registertask__input"
+          label="Date"
+          type="date"
+          id="date"
+          name="date"
+          min={minDate}
+          value={task.date}
+          onChange={handleChange}
+        />
 
-        {/* <Input
-          className='registertask__input'
-						label='Date'
-						type='date'
-						id='date'
-						name='date'
-						value={task.date}
-						onChange={handleChange}
-					/> */}
-        <Button
+        {/* <TaskStatusSelect dbId={dbId} status={status} user={user} /> */}
+        {/* <TaskStatusSelect /> */}
+
+        <button
           className="registertask__btn"
           type="submit"
           onClick={createTask}
         >
           Add Task
-        </Button>
+        </button>
       </form>
     </main>
   );

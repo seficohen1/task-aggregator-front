@@ -16,7 +16,8 @@ const UpdateUserForm = ({
   closeModal,
 }) => {
   const { user } = useContext(AuthContext);
-  const { setEmployees, setIsLoaded } = useContext(EmployeeContext);
+  const { setEmployees, setToggle } = useContext(EmployeeContext);
+  const { token } = useContext(AuthContext)
   const [selected, setSelected] = useState(new Set(["User"]));
   const [formValues, setFormValues] = useState({ firstName, lastName, email });
   const selectedValue = useMemo(
@@ -39,10 +40,10 @@ const UpdateUserForm = ({
       email,
       role,
       dropDownInput: selected.currentKey,
-    });
+    }, token.token);
     closeModal();
-    getAllUsers("http://localhost:4001/dashboard/users", setEmployees);
-    setIsLoaded(() => !true);
+    getAllUsers("http://localhost:4001/dashboard/users", setEmployees, token.token);
+    setToggle((prevState) => !prevState);
   };
 
   return (

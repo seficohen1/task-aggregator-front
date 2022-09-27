@@ -7,8 +7,9 @@ import { useForm } from "react-hook-form";
 import { updateTask } from "../../api/api";
 import TaskStatusSelect from "../../Components/TaskStatusSelect/TaskStatusSelect";
 import { dates } from '../../utils/index'
-import { dataHelpers } from '../../utils/data'
+import { dataHelpers } from '../../utils/index'
 import { alerts } from "../../utils/index";
+import { getUserFromName } from "../../api/api";
 import AuthContext from "../../context/AuthContext";
 
 
@@ -17,23 +18,10 @@ export default function TaskDetail() {
   
   const location = useLocation() || null;
   const { user, description, dbId, status, title, dueDate } = location.state;    
-  const formattedDate = dates.getFormattedDate(dueDate)  
-console.log(location.state)
-  const [newUser, setNewUser] = useState([]);
+  const formattedDate = dates.getFormattedDate(dueDate) ;
+  const minDate = dates.getFormattedDate(new Date(Date.now())) 
+
   
-  const createUpdatedTask = (data, newUser) => {
-    let updatedTask = {
-      title: data.title,
-      description: data.description,
-      status: data.status,
-      dueDate: data.dueDate,    
-    }
-    const updatedUserId = { _id: newUser.userByName[0]._id } || null;
-    if (updatedUserId) updatedTask.user = updatedUserId;
-    return updatedTask;
-}
-
-
   const { 
     register, 
     handleSubmit, 
@@ -43,20 +31,28 @@ console.log(location.state)
       status: status,
       firstName: user.firstName,
       lastName: user.lastName,
-      dueDate: formattedDate,
+      dueDate: minDate,
   }});
 
 
-  const onSubmit = (data) => {
-    if (dataHelpers.isChangedUser(user, data)) {
-      dataHelpers.checkForUserInDb(data, setNewUser)
+  const onSubmit = async (data) => {
+    console.log(data)
+    if (dataHelpers.isChangedUser(data, user)) {
+      const urlPath = `http://localhost:4001/dashboard/users`;
+      const newUser = await getUserFromName(urlPath, data);
+      console.log(newUser)
+      if (newUser.userByName.length === 0) {
+        Swal.fire(alerts.warningCreateUser);
+        return;
+      }
+      const task = dataHelpers.createUpdatedTask(data, newUser);
+      updateTask(dbId, task)
+      Swal.fire(alerts.updatedTaskSuccess);
     }
-    const updatedTask = createUpdatedTask(data, newUser)    
-    updateTask(dbId, updatedTask, token.token)
-    console.log('Updated user from form has been submitted')
   }
-   
-  
+
+
+
   return (
     <>
       <Grid.Container className="task__container">
@@ -111,9 +107,8 @@ console.log(location.state)
               className="task__input"
               label="Due Date"
               type="date"
-              placeholder={Date()}
-              min={Date()}
-              max="2022-12-31"
+              placeholder={minDate}
+              min={minDate}
               {...register("dueDate", {
                 required: 'Due date is required', 
                 valueAsDate: true,

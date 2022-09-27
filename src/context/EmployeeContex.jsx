@@ -6,14 +6,14 @@ export const EmployeeContext = createContext([]);
 
 const EmployeeProvider = ({ children }) => {
   const [employees, setEmployees] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     getAllUsers("http://localhost:4001/dashboard/users", setEmployees);
-  }, [isLoaded]);
+  }, [toggle]);
 
   return (
-    <EmployeeContext.Provider value={{ employees, setEmployees, setIsLoaded }}>
+    <EmployeeContext.Provider value={{ employees, setEmployees, setToggle }}>
       {children}
     </EmployeeContext.Provider>
   );

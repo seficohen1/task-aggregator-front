@@ -7,14 +7,15 @@
   display: flex;
   align-items: center;
   height: 5rem;
-  margin: .5rem 0 0 0;
+  margin: .6rem 0 0 0;
   padding: 0;
-  border-left: 5px solid var(--fifth-color);
+  border: 1px solid #dadada;
+  border-left: 7px solid #59bfee;
   border-radius: .4rem;
-  background-color: rgba(255, 255, 255, 0.353);
+  background-color: #fff;
 }
 .container__gird--employee:hover {
-  background-color: rgba(255, 255, 255, 0.637);
+  background-color: #f8f8f8;
 }
 
 .emp__grid:nth-child(1) {
@@ -46,6 +47,23 @@
 .emp__role {
   align-self: center;
 }
+
+.employee__edit--p {
+  padding: .8rem 1rem;
+  border-radius: .6rem;
+  background-color: #01577c;
+  color: #fff;
+  font-size: .9rem;
+  font-family: var(--task-font);
+  font-weight: 600;
+  letter-spacing: .15rem;
+  cursor: default;
+}
+
+.employee__edit--p:hover {
+  background-color: #0077aa;
+}
+
 .edit_emp{
  padding: 1rem;
 }

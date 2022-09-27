@@ -5,9 +5,13 @@ import TaskContainer from "../../Components/TaskContainer/TaskContainer";
 import "./Dashboard.css";
 import TopMenu from "../../Components/TopMenu/TopMenu";
 import UserDetail from "../UserDetail/UserDetail";
+import { useNavigate } from 'react-router-dom';
+
 
 const DashboardUser = () => {
   const [isTaskSelected, setIsTaskSelected] = useState(true);
+  const navigate = useNavigate();
+
   return (
     <>
       <main className="container__dashboard">
@@ -21,24 +25,27 @@ const DashboardUser = () => {
             <Container>
               {/* use task container component */}
               <Container className="taskmenu__container">
-                <Button
-                  size="sm"
-                  onClick={() => setIsTaskSelected(true)}
-                  className={
-                    !isTaskSelected ? "taskmenu__btn" : "taskmenu__btn selected"
-                  }
-                >
-                  Task
-                </Button>
-                <Button
-                  size="sm"
-                  onClick={() => setIsTaskSelected(false)}
-                  className={
-                    isTaskSelected ? "taskmenu__btn" : "taskmenu__btn selected"
-                  }
-                >
-                  Employees
-                </Button>
+                <article className='taskmenu__article'>
+                  <Button
+                    size="sm"
+                    onClick={() => setIsTaskSelected(true)}
+                    className={
+                      !isTaskSelected ? "taskmenu__btn" : "taskmenu__btn selected"
+                    }
+                  >
+                    Task
+                  </Button>
+                  <Button
+                    size="sm"
+                    onClick={() => setIsTaskSelected(false)}
+                    className={
+                      isTaskSelected ? "taskmenu__btn" : "taskmenu__btn selected"
+                    }
+                  >
+                    Employees
+                  </Button>
+                </article>
+              <Button className='taskmenu__office--btn' size='xs'onClick={() => {navigate("/admin")}}>OFFICE</Button>
               </Container>
               {isTaskSelected ? <TaskContainer /> : <UserDetail />}
               {/* <TaskContainer /> */}

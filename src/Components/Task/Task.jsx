@@ -2,32 +2,22 @@ import React, {useContext} from 'React'
 import { Grid, Dropdown, Collapse, Button } from "@nextui-org/react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Task.css";
-import axios from "axios";
+import { deleteTask } from "../../api/api";
 import TaskStatusSelect from "../TaskStatusSelect/TaskStatusSelect";
-import { dates } from "../../utils/index";
-import AuthContext from "../../context/AuthContext";
+import { dates, alerts } from "../../utils/index";
+import Swal from "sweetalert2";
+import AuthContext from '../../context/AuthContext';
 
 const Task = (props) => {
+  
+  const { token } = useContext(AuthContext)
   const { dbId, user, title, status } = props;
   // format date for dashboard, using func from utils
+  // console.log("user", user.firstName)
+  const navigate = useNavigate();
   const dueDate = dates.getLongDate(props.dueDate);
 
-  const {token} = useContext(AuthContext)
-
-  const deleteTask = (id) => {
-    console.log(id)
-
-    axios
-      .delete(`http://localhost:4001/dashboard/tasks/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token.token}`
-        }
-      })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-
-    window.location.reload();
-  };
+  
 
   return (
     <main className="container__task">
@@ -37,7 +27,7 @@ const Task = (props) => {
         </Grid>
         <Grid className="task__grid" xs={2}>
           <span className="task__username">
-            {/* {user.firstName} {user.lastName} */}
+            {user?.firstName} {user?.lastName}
           </span>
         </Grid>
         <Grid className="task__grid" xs={2}>
@@ -56,12 +46,23 @@ const Task = (props) => {
               aria-label="Actions"
             >
               <Dropdown.Item key="edit" textValue="edit task">
-                <Link to="/task" state={props}>
-                  Edit
-                </Link>
+                <Button onClick={() => {
+                  navigate('/task', { state: props})
+                // to='/task' state={props}>
+                }}>
+                Edit
+                </Button>
               </Dropdown.Item>
               <Dropdown.Item key="delete" color="error">
-                <Button onClick={() => deleteTask(dbId)}>Delete</Button>
+                <Button onClick={() => {
+                  Swal.fire(alerts.confirmAlert).then((result)=> {
+                    if (result.isConfirmed) {
+                      deleteTask(dbId, token.token)
+                      Swal.fire(alerts.taskDeleted)
+                    }
+                  })
+                  setTimeout(() => { window.location.reload()}, 2000);
+            }}>Delete</Button>
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
