@@ -60,52 +60,59 @@ const RegisterTask = () => {
     <main className="registertask__container">
       <form className="registertask__form">
         <h2 className="task__title">NEW TASK</h2>
-        <Input
-          className="registertask__input"
-          label="Title"
-          type="text"
-          id="title"
-          name="title"
-          value={task.title}
-          onChange={handleChange}
-        />
-        <Input
-          className="registertask__input"
-          label="Description"
-          type="text"
-          id="description"
-          name="description"
-          value={task.description}
-          onChange={handleChange}
-        />
-        <Input
-          className="registertask__input"
-          label="First name"
-          type="text"
-          id="firstName"
-          name="firstName"
-          value={task.firstName}
-          onChange={handleChange}
-        />
-        <Input
-          className="registertask__input"
-          label="Last name"
-          type="text"
-          id="lastName"
-          name="lastName"
-          value={task.lastName}
-          onChange={handleChange}
-        />
-        <Input
-          className="registertask__input"
-          label="Date"
-          type="date"
-          id="date"
-          name="date"
-          min={minDate}
-          value={task.date}
-          onChange={handleChange}
-        />
+        <article className='register__task--article'>
+          <Input
+            className="registertask__input wide"
+            label="Title"
+            type="text"
+            id="title"
+            name="title"
+            value={task.title}
+            onChange={handleChange}
+          />
+        </article>
+        <article className='register__task--article'>
+          <Input
+            className="registertask__input"
+            label="First name"
+            type="text"
+            id="firstName"
+            name="firstName"
+            value={task.firstName}
+            onChange={handleChange}
+          />
+          <Input
+            className="registertask__input"
+            label="Last name"
+            type="text"
+            id="lastName"
+            name="lastName"
+            value={task.lastName}
+            onChange={handleChange}
+          />
+        </article>
+        <article className="register__task--article">
+          <Textarea
+            className="registertask__input wide"
+            label="Description"
+            type="text"
+            id="description"
+            name="description"
+            value={task.description}
+            onChange={handleChange}
+          />
+        </article>
+        <article className="register__task--article">
+          <Input
+            className="registertask__input"
+            label="Date"
+            type="date"
+            id="date"
+            name="date"
+            value={task.date}
+            onChange={handleChange}
+          />
+        </article>
 
         {/* <TaskStatusSelect dbId={dbId} status={status} user={user} /> */}
         {/* <TaskStatusSelect /> */}

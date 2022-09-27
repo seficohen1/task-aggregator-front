@@ -11,10 +11,10 @@ import TopMenu from '../Components/TopMenu/TopMenu';
 const RouterPath = () => {
   return (
     <Routes>
+      <Route index element={<Login />} />
       <Route path='/' element={<TopMenu />} >
-        <Route index element={<Login />} />
-        <Route path="dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="admin" element={<ProtectedAdmin><Admin /></ProtectedAdmin>} />
+        <Route path="dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="task" element={<ProtectedRoute><TaskDetail /></ProtectedRoute>} />
           {/* <Route path="dashboard/:userId" element={<UserDetail />} /> */}
       </Route>

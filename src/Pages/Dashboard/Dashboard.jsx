@@ -45,7 +45,7 @@ const DashboardUser = () => {
                     Employees
                   </Button>
                 </article>
-              <Button className='taskmenu__office--btn' size='xs'onClick={() => {navigate("/admin")}}>OFFICE</Button>
+              <Button className='taskmenu__office--btn' size='xs'onClick={() => {navigate("admin")}}>OFFICE</Button>
               </Container>
               {isTaskSelected ? <TaskContainer /> : <UserDetail />}
               {/* <TaskContainer /> */}
