@@ -39,7 +39,7 @@ export default function TaskDetail() {
     console.log(data)
     if (dataHelpers.isChangedUser(data, user)) {
       const urlPath = `http://localhost:4001/dashboard/users`;
-      const newUser = await getUserFromName(urlPath, data);
+      const newUser = await getUserFromName(urlPath, data, token.token);
       console.log(newUser)
       if (newUser.userByName.length === 0) {
         Swal.fire(alerts.warningCreateUser);
