@@ -1,6 +1,6 @@
 import "./TaskDetail.css";
 import { useState, useContext } from 'react'
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Input, Grid, Textarea } from "@nextui-org/react";
 import Swal from 'sweetalert2'
 import { useForm } from "react-hook-form";
@@ -15,7 +15,7 @@ import AuthContext from "../../context/AuthContext";
 
 export default function TaskDetail() {
   const {token} = useContext(AuthContext)
-  
+  const navigate = useNavigate();
   const location = useLocation() || null;
   const { user, description, dbId, status, title, dueDate } = location.state;    
   const formattedDate = dates.getFormattedDate(dueDate) ;
